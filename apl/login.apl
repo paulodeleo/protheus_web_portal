@@ -2,28 +2,32 @@
 #include "apwebex.ch"
 #include "tbiconn.ch"
 
-// Monta form de login                         
-user function portal1(bErro)
+// Monta form de login
+// Se lErro for verdadeiro, mensagem de erro será exibida
+user function portal1(lErro)
   local cHtml := ''
-  private bExibirMensagem := .f.
+  private lExibirMensagem := .f.
 
-  if bErro
-    bExibirMensagem := .t.
+  if lErro
+    lExibirMensagem := .t.
   endif
   cHtml := h_form()
 return cHtml       
 
 // Autentica form de login
 user function portal2()
+
   local cHtml := ''
-  local cUsuario := HttpPost->usuario
+  local _cUsuario := HttpPost->usuario
   local _cSenha := HttpPost->senha
-  
-  if cUsuario == 'paulo' .and. _cSenha == '1234'
+
+  PswOrder(2)
+  if PswSeek( _cUsuario, .t. ) .and. PswName(_cSenha) .and. !empty(_cUsuario + _cSenha)
     cHtml := u_portal3()
   else
     cHtml := u_portal1(.t.)
   endif
+
 return cHtml       
 
 // Monta tela pós login

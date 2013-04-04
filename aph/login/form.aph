@@ -8,7 +8,7 @@
   
     <h1>Bem vindo ao Portal</h1>
 
-    <% if bExibirMensagem %>
+    <% if lExibirMensagem %>
       <p>Usuário ou senha inválidos!</p>
     <% endif %>
  
