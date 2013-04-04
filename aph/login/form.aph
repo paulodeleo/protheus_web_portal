@@ -9,7 +9,7 @@
     <h1>Bem vindo ao Portal</h1>
 
     <% if bExibirMensagem %>
-      <p>Usuário ou senha inv?lidos!</p>
+      <p>Usuário ou senha inválidos!</p>
     <% endif %>
  
     <form action="/u_index.apw?modulo=login&acao=autenticacao" method="post">
