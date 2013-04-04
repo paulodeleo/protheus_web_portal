@@ -22,20 +22,12 @@ user function portal2()
   local _cSenha := HttpPost->senha
 
   PswOrder(2)
-  if PswSeek( _cUsuario, .t. ) .and. PswName(_cSenha) .and. !empty(_cUsuario + _cSenha)
+  if PswSeek(_cUsuario, .t.) .and. PswName(_cSenha) .and. !empty(_cUsuario + _cSenha)
+    HttpSession->logado := .t.
     cHtml := u_portal3()
   else
+    HttpSession->logado := .f.
     cHtml := u_portal1(.t.)
   endif
 
-return cHtml       
-
-// Monta tela pós login
-user function portal3()
-  local cHtml := 'Logado!' 
-return cHtml       
-
-
-
-
-
+return cHtml

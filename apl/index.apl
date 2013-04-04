@@ -10,15 +10,21 @@ user function index()
 	local cHtml := '' 
 	WEB EXTENDED INIT cHtml
 
+	if HttpSession->logado == nil
+		HttpSession->logado == .f.
+	endif
+
   HttpHeadOut->content_type := "text/html; charset=ISO-8859-1" // força encoding e corrige problemas com acentos
 
 	if HttpGet->modulo == 'login'
-		if HttpGet->acao == nil
+		if HttpGet->acao == nil .or. HttpGet->acao == 'form'
 		  cHtml := u_portal1()
-	 	elseif HttpGet->acao == 'form'
-	 		cHtml := u_portal1()     
 	 	elseif HttpGet->acao == 'autenticacao'
 	 		cHtml := u_portal2()
+	 	endif
+	elseif HttpGet->modulo == 'compras'
+		if HttpGet->acao == nil .or. HttpGet->acao == 'listagem_sc'
+	 		cHtml := u_portal4()
 	 	endif
 	else
 		cHtml := u_portal1()
