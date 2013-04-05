@@ -34,6 +34,9 @@ USER Function ConnectWebEx(cFnName)
 Local cHtmlConn := ''
 //conout('Vou executar '+cFnName)
 
+// Redireciona para tela de login caso usuário não esteja autenticado
+cHtmlConn := u_verifica_login()
+
 // Unifica parametros enviados via get para post, caso já não haja nenhum com mesmo nome (o esperado)
 For i := 1 to Len(HttpGet->AGETS)
   cChave = HttpGet->AGETS[i]
