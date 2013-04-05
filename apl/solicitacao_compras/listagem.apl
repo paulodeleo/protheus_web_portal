@@ -9,9 +9,6 @@ user function portal3()
 
   if HttpSession->logado
 
-    RpcClearEnv()
-    RpcSetEnv('99', '01')
-
     dbselectarea("SC1")
     SC1->(dbSetOrder(1))
     SC1->(dbgotop())
@@ -21,5 +18,5 @@ user function portal3()
   else
     cHtml := redirpage('/')
   endif
-  
+
 return cHtml
