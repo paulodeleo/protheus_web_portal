@@ -1,0 +1,68 @@
+<!DOCTYPE html> 
+<html>
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Portal Protheus</title>     
+  </head>
+  <body>
+  
+    <h1>Listagem de SC</h1>
+
+    <form action="/u_index.apw?modulo=compras&acao=filtrar_sc" method="get">
+      <p>
+        Status:
+        <select>
+          <option>Aberto</option>
+          <option>Totalmente atendido</option>
+          <option>Parcialmente atendido</option>
+        </select>
+        <input type="submit" value="filtrar">
+      </p>
+
+      <table>
+        <tr>
+          <th>Nº SC</th>
+          <th>Item</th>
+          <th>Produto</th>
+          <th>Un. Med.</th>
+          <th>Qth.</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+        <tr>
+          <td>000001</td>
+          <td>0001</td>
+          <td>10,000</td>
+          <td>UN</td>
+          <td>1</td>
+          <td>Aberto</td>
+          <td>D E X</td>
+        </tr>
+        <tr>
+          <td>000001</td>
+          <td>0001</td>
+          <td>10,000</td>
+          <td>UN</td>
+          <td>1</td>
+          <td>Aberto</td>
+          <td>D E X</td>
+        </tr>
+        <tr>
+          <td>000001</td>
+          <td>0001</td>
+          <td>10,000</td>
+          <td>UN</td>
+          <td>1</td>
+          <td>Aberto</td>
+          <td>D E X</td>
+        </tr>
+
+      </table>
+
+
+      <input type="submit" value="Incluir SC">
+
+    </form>
+
+  </body>
+</html>

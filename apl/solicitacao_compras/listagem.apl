@@ -6,7 +6,7 @@
 user function portal3()
   local cHtml := ''
   if HttpSession->logado
-    cHtml := 'Listagem de SC restrita por login.'
+    cHtml := h_list_sc()
   else
     cHtml := redirpage('/')
   endif
