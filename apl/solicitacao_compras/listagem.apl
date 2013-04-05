@@ -3,7 +3,7 @@
 #include "tbiconn.ch"
 
 // Monta tela pós login
-user function portal4()
+user function portal3()
   local cHtml := ''
   if HttpSession->logado
     cHtml := 'Listagem de SC restrita por login.'
