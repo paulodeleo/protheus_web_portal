@@ -8,7 +8,7 @@
       <option>Totalmente atendido</option>
       <option>Parcialmente atendido</option>
     </select>
-    <input type="submit" value="Filtrar">
+    <input type="submit" value="Filtrar" onClick="javascript:alert('ainda não implementado'); return false;">
   </p>
 
   <table>
@@ -32,7 +32,11 @@
         <td><%= SC1->C1_UM %></td>
         <td><%= SC1->C1_QUANT %></td>
         <td></td>
-        <td></td>
+        <td>
+          <a href="javascript:alert('ainda não implementado')">Detalhes</a>
+          <a href="javascript:alert('ainda não implementado')">Editar</a>
+          <a href="javascript:alert('ainda não implementado')">Excluir</a>
+        </td>
       </tr>
       <%
       SC1->(dbskip())
@@ -41,6 +45,6 @@
 
   </table>
 
-  <input type="submit" value="Incluir SC">
+  <input type="submit" value="Incluir SC" onClick="javascript:alert('ainda não implementado'); return false;">
 
 </form>
