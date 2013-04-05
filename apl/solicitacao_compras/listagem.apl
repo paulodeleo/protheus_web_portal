@@ -7,16 +7,10 @@ user function portal3()
 
   local cHtml := ''
 
-  if HttpSession->logado
-
-    dbselectarea("SC1")
-    SC1->(dbSetOrder(1))
-    SC1->(dbgotop())
-    cHtml := h_list_sc()
-    dbCloseArea("SC1") 
+  dbselectarea("SC1")
+  SC1->(dbSetOrder(1))
+  SC1->(dbgotop())
+  cHtml := h_list_sc()
+  dbCloseArea("SC1") 
     
-  else
-    cHtml := redirpage('/')
-  endif
-
 return cHtml

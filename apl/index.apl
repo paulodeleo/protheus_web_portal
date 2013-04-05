@@ -12,10 +12,6 @@ user function index()
 
 	cHtml := h_cabecalho()
 
-	if HttpSession->logado == nil
-		HttpSession->logado == .f.
-	endif
-
   HttpHeadOut->content_type := "text/html; charset=ISO-8859-1" // força encoding e corrige problemas com acentos
 
 	if HttpGet->modulo == 'login'
