@@ -16,7 +16,7 @@
           <option>Totalmente atendido</option>
           <option>Parcialmente atendido</option>
         </select>
-        <input type="submit" value="filtrar">
+        <input type="submit" value="Filtrar">
       </p>
 
       <table>
@@ -25,40 +25,29 @@
           <th>Item</th>
           <th>Produto</th>
           <th>Un. Med.</th>
-          <th>Qth.</th>
+          <th>Qtd.</th>
           <th>Status</th>
           <th>Ações</th>
         </tr>
-        <tr>
-          <td>000001</td>
-          <td>0001</td>
-          <td>10,000</td>
-          <td>UN</td>
-          <td>1</td>
-          <td>Aberto</td>
-          <td>D E X</td>
-        </tr>
-        <tr>
-          <td>000001</td>
-          <td>0001</td>
-          <td>10,000</td>
-          <td>UN</td>
-          <td>1</td>
-          <td>Aberto</td>
-          <td>D E X</td>
-        </tr>
-        <tr>
-          <td>000001</td>
-          <td>0001</td>
-          <td>10,000</td>
-          <td>UN</td>
-          <td>1</td>
-          <td>Aberto</td>
-          <td>D E X</td>
-        </tr>
+
+        <%
+        while !SC1->(eof())   
+          %>
+          <tr>
+            <td><%= SC1->C1_NUM %></td>
+            <td><%= SC1->C1_ITEM %></td>
+            <td><%= SC1->C1_PRODUTO %></td>
+            <td><%= SC1->C1_UM %></td>
+            <td><%= SC1->C1_QUANT %></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <%
+          SC1->(dbskip())
+        end
+        %>
 
       </table>
-
 
       <input type="submit" value="Incluir SC">
 
