@@ -24,7 +24,7 @@ user function portal2()
   PswOrder(2)
   if PswSeek(_cUsuario, .t.) .and. PswName(_cSenha) .and. !empty(_cUsuario + _cSenha)
     HttpSession->logado := .t.
-    cHtml := u_portal3()
+    cHtml := redirpage('/u_index.apw?modulo=compras')
   else
     HttpSession->logado := .f.
     cHtml := u_portal1(.t.)

@@ -24,7 +24,7 @@ user function index()
 	 	endif
 	elseif HttpGet->modulo == 'compras'
 		if HttpGet->acao == nil .or. HttpGet->acao == 'listagem_sc'
-	 		cHtml := u_portal4()
+	 		cHtml := u_portal3()
 	 	endif
 	else
 		cHtml := u_portal1()
