@@ -7,8 +7,10 @@
 // Chamar no browser como http://localhost:8080/u_index.apw
 user function index()
 
-	local cHtml := '' 
+	local cHtml
 	WEB EXTENDED INIT cHtml
+
+	cHtml := h_cabecalho()
 
 	if HttpSession->logado == nil
 		HttpSession->logado == .f.
@@ -18,17 +20,19 @@ user function index()
 
 	if HttpGet->modulo == 'login'
 		if HttpGet->acao == nil .or. HttpGet->acao == 'form'
-		  cHtml := u_portal1()
+		  cHtml += u_portal1()
 	 	elseif HttpGet->acao == 'autenticacao'
-	 		cHtml := u_portal2()
+	 		cHtml += u_portal2()
 	 	endif
 	elseif HttpGet->modulo == 'compras'
 		if HttpGet->acao == nil .or. HttpGet->acao == 'listagem_sc'
-	 		cHtml := u_portal3()
+	 		cHtml += u_portal3()
 	 	endif
 	else
-		cHtml := u_portal1()
+		cHtml += u_portal1()
 	endif
+
+	cHtml += h_rodape()
 
 	WEB EXTENDED END
 

@@ -1,57 +1,46 @@
-<!DOCTYPE html> 
-<html>
-  <head>
-    <meta charset="ISO-8859-1" />
-    <title>Portal Protheus</title>     
-  </head>
-  <body>
-  
-    <h1>Listagem de SC</h1>
+<h1>Listagem de SC</h1>
 
-    <form action="/u_index.apw?modulo=compras&acao=filtrar_sc" method="get">
-      <p>
-        Status:
-        <select>
-          <option>Aberto</option>
-          <option>Totalmente atendido</option>
-          <option>Parcialmente atendido</option>
-        </select>
-        <input type="submit" value="Filtrar">
-      </p>
+<form action="/u_index.apw?modulo=compras&acao=filtrar_sc" method="get">
+  <p>
+    Status:
+    <select>
+      <option>Aberto</option>
+      <option>Totalmente atendido</option>
+      <option>Parcialmente atendido</option>
+    </select>
+    <input type="submit" value="Filtrar">
+  </p>
 
-      <table>
-        <tr>
-          <th>Nº SC</th>
-          <th>Item</th>
-          <th>Produto</th>
-          <th>Un. Med.</th>
-          <th>Qtd.</th>
-          <th>Status</th>
-          <th>Ações</th>
-        </tr>
+  <table>
+    <tr>
+      <th>Nº SC</th>
+      <th>Item</th>
+      <th>Produto</th>
+      <th>Un. Med.</th>
+      <th>Qtd.</th>
+      <th>Status</th>
+      <th>Ações</th>
+    </tr>
 
-        <%
-        while !SC1->(eof())   
-          %>
-          <tr>
-            <td><%= SC1->C1_NUM %></td>
-            <td><%= SC1->C1_ITEM %></td>
-            <td><%= SC1->C1_PRODUTO %></td>
-            <td><%= SC1->C1_UM %></td>
-            <td><%= SC1->C1_QUANT %></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <%
-          SC1->(dbskip())
-        end
-        %>
+    <%
+    while !SC1->(eof())   
+      %>
+      <tr>
+        <td><%= SC1->C1_NUM %></td>
+        <td><%= SC1->C1_ITEM %></td>
+        <td><%= SC1->C1_PRODUTO %></td>
+        <td><%= SC1->C1_UM %></td>
+        <td><%= SC1->C1_QUANT %></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <%
+      SC1->(dbskip())
+    end
+    %>
 
-      </table>
+  </table>
 
-      <input type="submit" value="Incluir SC">
+  <input type="submit" value="Incluir SC">
 
-    </form>
-
-  </body>
-</html>
+</form>

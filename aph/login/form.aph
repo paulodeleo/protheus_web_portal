@@ -1,22 +1,12 @@
-<!DOCTYPE html> 
-<html>
-  <head>
-    <meta charset="ISO-8859-1" />
-    <title>Portal Protheus</title>     
-  </head>
-  <body>
-  
-    <h1>Bem vindo ao Portal</h1>
+<h1>Bem vindo ao Portal</h1>
 
-    <% if lExibirMensagem %>
-      <p>Usuário ou senha inválidos!</p>
-    <% endif %>
- 
-    <form action="/u_index.apw?modulo=login&acao=autenticacao" method="post">
-      Usuário: <input type="text" name="usuario"><br>
-      Senha: <input type="password" name="senha"><br>
-      <input type="submit" value="Entrar">
-    </form>
+<% if lExibirMensagem %>
+  <p>Usuário ou senha inválidos!</p>
+<% endif %>
 
-  </body>
-</html>
+<form action="/u_index.apw?modulo=login&acao=autenticacao" method="post">
+  Usuário: <input type="text" name="usuario"><br>
+  Senha: <input type="password" name="senha"><br>
+  <input type="submit" value="Entrar">
+</form>
+    
