@@ -2,57 +2,86 @@
   <div class="row-fluid">
     <div class="span9">
 
-<h3>Listagem de SC</h3>
+      <h3>Listagem de Solicitações de Compras</h3>
 
-<form class="form-inline" action="/u_index.apw?modulo=compras&acao=filtrar_sc" method="get">
-  <p>
-    Status:
-    <select>
-      <option>Aberto</option>
-      <option>Totalmente atendido</option>
-      <option>Parcialmente atendido</option>
-    </select>
-    <input type="submit" value="Filtrar" onClick="javascript:alert('ainda não implementado'); return false;">
-  </p>
+      <form class="form-inline" action="/u_index.apw?modulo=compras&acao=filtrar_sc" method="get">
+        <p>
+          Status:
+          <select>
+            <option>Aberto</option>
+            <option>Totalmente atendido</option>
+            <option>Parcialmente atendido</option>
+          </select>
+          <input type="submit" value="Filtrar" class="btn btn-primary" onClick="javascript:alert('ainda não implementado'); return false;">
+        </p>
+      </form>
 
-  <table class="table table-hover">
-    <tr>
-      <th>Nº SC</th>
-      <th>Item</th>
-      <th>Produto</th>
-      <th>Un. Med.</th>
-      <th>Qtd.</th>
-      <th>Status</th>
-      <th>Ações</th>
-    </tr>
+      <table class="table table-hover table-striped">
+        <tr>
+          <th>Nº SC</th>
+          <th>Item</th>
+          <th>Produto</th>
+          <th>Un. Med.</th>
+          <th>Qtd.</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
 
-    <%
-    while !SC1->(eof())   
-      %>
-      <tr>
-        <td><%= SC1->C1_NUM %></td>
-        <td><%= SC1->C1_ITEM %></td>
-        <td><%= SC1->C1_PRODUTO %></td>
-        <td><%= SC1->C1_UM %></td>
-        <td><%= SC1->C1_QUANT %></td>
-        <td></td>
-        <td>
-          <a href="javascript:alert('ainda não implementado')">Detalhes</a>
-          <a href="javascript:alert('ainda não implementado')">Editar</a>
-          <a href="javascript:alert('ainda não implementado')">Excluir</a>
-        </td>
-      </tr>
-      <%
-      SC1->(dbskip())
-    end
-    %>
+        <%
+        while !SC1->(eof())   
+          %>
+          <tr>
+            <td><%= SC1->C1_NUM %></td>
+            <td><%= SC1->C1_ITEM %></td>
+            <td><%= SC1->C1_PRODUTO %></td>
+            <td><%= SC1->C1_UM %></td>
+            <td><%= SC1->C1_QUANT %></td>
+            <td><i class="icon-circle icon-large legenda sc-status-aberto"></i></td>
+            <td>
+              <a href="javascript:alert('ainda não implementado')"><i class="icon-search icon-large no-link"></i></a>
+              <a href="javascript:alert('ainda não implementado')"><i class="icon-edit icon-large no-link"></i></a>
+              <a href="javascript:excluirSC('<%= SC1->C1_NUM %>')"><i class="icon-remove icon-large no-link"></i></a>
+            </td>
+          </tr>
+          <%
+          SC1->(dbskip())
+        end
+        %>
 
-  </table>
+      </table>
 
-  <input type="submit" value="Incluir SC" onClick="javascript:alert('ainda não implementado'); return false;">
-
-</form>
+      <input type="submit" value="Incluir SC" class="btn btn-primary" onClick="javascript:alert('ainda não implementado'); return false;">
 
     </div><!-- container-fluid -->
   </div><!-- row-fluid -->
 </div><!-- container-fluid -->
+
+<div id="legenda-sc" class="hide">
+  <i class="icon-circle icon-large legenda sc-status-aberto"></i> Aberto<br>
+  <i class="icon-circle icon-large legenda sc-status-totalmente-atendido"></i> Totalmente atendido<br>
+  <i class="icon-circle icon-large legenda sc-status-parcialmente-atendido"></i> Parcialmente Atendido
+</div>
+
+<script>
+$(document).ready(function(){  
+  $('.icon-search').tooltip({"title": "Detalhes"});
+  $('.icon-edit').tooltip({"title": "Editar"});
+  $('.icon-remove').tooltip({"title": "Remover"});
+
+  $('.legenda').popover({
+    "trigger": "hover", 
+    "placement": "bottom",
+    "html": true,
+    "title": "Legenda de status de SC:", 
+    "content": function(){ return $('#legenda-sc').html(); }
+  });
+
+});
+
+function excluirSC(num){
+  if (confirm('Tem certeza que deseja excluir a SC' + num + '?')) {
+    alert('ainda não implementado');
+  }
+}
+
+</script>
