@@ -38,7 +38,7 @@
       Usuário ou senha inválidos!
     </div>  
   <% endif %>
-  <input type="text" name="usuario" class="input-block-level" placeholder="usuário">
+  <input type="text" name="usuario" value="<%= HttpPost->usuario %>" class="input-block-level" placeholder="usuário">
   <input type="password" name="senha" class="input-block-level" placeholder="senha">
   <button class="btn btn-large btn-primary" type="submit">Entrar</button>
 </form>
