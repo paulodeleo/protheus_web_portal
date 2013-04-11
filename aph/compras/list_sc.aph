@@ -36,7 +36,10 @@
             <td><%= SC1->C1_PRODUTO %></td>
             <td><%= SC1->C1_UM %></td>
             <td><%= SC1->C1_QUANT %></td>
-            <td><i class="icon-circle icon-large legenda sc-status-aberto"></i></td>
+            <td>
+              <% oSC := SC():New(SC1->C1_NUM) %>
+              <i class="icon-circle icon-large legenda sc-status-<%= oSC:Status() %>"></i>
+            </td>
             <td>
               <a href="javascript:alert('ainda não implementado')"><i class="icon-search icon-large no-link"></i></a>
               <a href="javascript:alert('ainda não implementado')"><i class="icon-edit icon-large no-link"></i></a>
@@ -57,9 +60,16 @@
 </div><!-- container-fluid -->
 
 <div id="legenda-sc" class="hide">
-  <i class="icon-circle icon-large legenda sc-status-aberto"></i> Aberto<br>
-  <i class="icon-circle icon-large legenda sc-status-totalmente-atendido"></i> Totalmente atendido<br>
-  <i class="icon-circle icon-large legenda sc-status-parcialmente-atendido"></i> Parcialmente Atendido
+  <i class="icon-circle icon-large legenda sc-status-1"></i> Totalmente Atendido<br>
+  <i class="icon-circle icon-large legenda sc-status-2"></i> Solicitacao de Importacao<br>
+  <i class="icon-circle icon-large legenda sc-status-3"></i> Eliminada por Residuo<br>
+  <i class="icon-circle icon-large legenda sc-status-4"></i> Em Aberto<br>
+  <i class="icon-circle icon-large legenda sc-status-5"></i> Rejeitada<br>
+  <i class="icon-circle icon-large legenda sc-status-6"></i> Bloqueada<br>
+  <i class="icon-circle icon-large legenda sc-status-7"></i> Pedido Colocado<br>
+  <i class="icon-circle icon-large legenda sc-status-8"></i> Pedido Colocado Parcial<br>
+  <i class="icon-circle icon-large legenda sc-status-9"></i> Processo de Cotacao<br>
+  <i class="icon-circle icon-large legenda sc-status-10"></i> Produto Importado<br>
 </div>
 
 <script>

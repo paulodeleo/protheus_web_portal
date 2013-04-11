@@ -15,9 +15,19 @@ div.container-fluid {
           box-shadow: 0 1px 2px rgba(0,0,0,.05);
 }
 
-i.no-link {text-decoration: none}
+i.no-link {
+  text-decoration: none;
+  color: #5B5B5B
+}
 
-i.sc-status-aberto {color: green;}
-i.sc-status-totalmente-atendido {color: orange;}
-i.sc-status-parcialmente-atendido {color: red;}
+i.sc-status-1 {color: brown;} /*totalmente atendido*/
+i.sc-status-2 {color: white; text-shadow: 1px 1px black;}/*Solicitacao de Importacao*/
+i.sc-status-3 {color: black;}/*Eliminada por Residuo*/
+i.sc-status-4 {color: green;}/*m Aberto*/
+i.sc-status-5 {color: orange;}/*Rejeitada*/
+i.sc-status-6 {color: grey;}/*Bloqueada*/
+i.sc-status-7 {color: lightgrey;}/*Pedido Colocado*/
+i.sc-status-8 {color: yellow;}/*Pedido Colocado Parcial*/
+i.sc-status-9 {color: blue;}/*Processo de Cotacao*/
+i.sc-status-10 {color: #FF00FF;}/*Produto Importado*/
 
