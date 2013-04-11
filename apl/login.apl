@@ -11,7 +11,7 @@ user function portal1(lErro)
   if lErro
     lExibirMensagem := .t.
   endif
-  cHtml := h_form()
+  cHtml := h_form_login()
 return cHtml       
 
 // Autentica form de login
