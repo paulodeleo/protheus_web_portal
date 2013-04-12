@@ -23,8 +23,12 @@ user function portal2()
 
   PswOrder(2)
   if PswSeek(_cUsuario, .t.) .and. PswName(_cSenha) .and. !empty(_cUsuario + _cSenha)
+
+
     HttpSession->logado := .t.
     HttpSession->UserId := PswID()
+    // Xunxo para garantir que uma área está aberta antes de chamar UsrFullName(), senão dá erro...
+    Select('SC1')
     HttpSession->NomeUsuario := UsrFullName(httpsession->UserId)
     cHtml := redirpage('/u_index.apw?modulo=compras')
   else
