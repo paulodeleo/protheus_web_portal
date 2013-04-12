@@ -14,5 +14,18 @@
 <body>
 
 <% if HttpSession->logado %>
+
   <%= h_navbar() %>
+
+  <div class="container-fluid">   
+    <div class="row-fluid">
+      
+      <div class="span2">
+        <%= h_menu() %>
+      </div><!--/span2-->
+
+      <div class="span10 modulos">
+
+<% else %>
+
 <% endif %>
