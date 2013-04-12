@@ -31,3 +31,15 @@ user function portal2()
   endif
 
 return cHtml
+
+// Desloga e redireciona usuário para tela de login
+user function portal5()
+
+  local cHtml := ''
+
+  HttpSession->logado := .f.
+  HttpSession->usuario := nil
+  HttpSession->nome_usuario := nil
+  cHtml := redirpage('/u_index.apw?modulo=login')
+
+return cHtml

@@ -19,6 +19,8 @@ user function index()
 		  cHtml += u_portal1()
 	 	elseif HttpGet->acao == 'autenticacao'
 	 		cHtml += u_portal2()
+	 	elseif HttpGet->acao == 'sair'
+	 		cHtml += u_portal5()
 	 	endif
 	elseif HttpGet->modulo == 'compras'
 		if HttpGet->acao == nil .or. HttpGet->acao == 'listagem_sc'

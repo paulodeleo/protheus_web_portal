@@ -12,3 +12,7 @@
 <script src="/js/chosen.jquery.min.js"></script>
 </head>
 <body>
+
+<% if HttpSession->logado %>
+  <%= h_navbar() %>
+<% endif %>
