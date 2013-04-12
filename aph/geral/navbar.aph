@@ -6,6 +6,12 @@
     </a>
     <ul class="nav pull-right">
       <li>
+        <a href="/u_index.apw" onClick="javascript: return false;">
+          <i class="icon-user"></i> <%= HttpSession->NomeUsuario %>
+        </a>
+      </li>
+      <li class="divider-vertical"></li>
+      <li>
         <a href="/u_index.apw?modulo=login&acao=sair">
           <i class="icon-off"></i> Sair
         </a>

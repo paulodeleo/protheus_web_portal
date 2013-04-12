@@ -24,6 +24,8 @@ user function portal2()
   PswOrder(2)
   if PswSeek(_cUsuario, .t.) .and. PswName(_cSenha) .and. !empty(_cUsuario + _cSenha)
     HttpSession->logado := .t.
+    HttpSession->UserId := PswID()
+    HttpSession->NomeUsuario := UsrFullName(httpsession->UserId)
     cHtml := redirpage('/u_index.apw?modulo=compras')
   else
     HttpSession->logado := .f.
@@ -38,8 +40,8 @@ user function portal5()
   local cHtml := ''
 
   HttpSession->logado := .f.
-  HttpSession->usuario := nil
-  HttpSession->nome_usuario := nil
+  HttpSession->UserId := nil
+  HttpSession->NomeUsuario := nil
   cHtml := redirpage('/u_index.apw?modulo=login')
 
 return cHtml
