@@ -13,3 +13,32 @@ user function verifica_login()
     endif
   endif
 return cHtmlConn
+
+// Troca empresa e filial se foram enviadas por http
+user function TrocaEmpresa()
+
+  // Definindo empresa 99 filial 01 por padrão nos combos do portal
+  if HttpSession->empresa == nil .or. HttpSession->filial == nil
+    HttpSession->empresa := '99'
+    HttpSession->filial := '01'
+
+    //PREPARE ENVIRONMENT EMPRESA HttpSession->empresa FILIAL HttpSession->filial
+    RpcClearEnv()
+    RpCSetType(3) //Nao consome licenças
+    RpcSetEnv(HttpSession->empresa, HttpSession->filial, '','', 'SIGAFAT', ,{'SC1'})
+    
+  endif
+
+  // Definindo empresa e filial conforme enviados por http
+  if HttpGet->empresa != nil .and. HttpGet->filial != nil
+    HttpSession->empresa := HttpGet->empresa
+    HttpSession->filial := HttpGet->filial
+
+    //PREPARE ENVIRONMENT EMPRESA HttpSession->empresa FILIAL HttpSession->filial
+    RpcClearEnv()
+    RpCSetType(3) //Nao consome licenças
+    RpcSetEnv(HttpSession->empresa, HttpSession->filial, '','', 'SIGAFAT', ,{'SC1'})
+
+  endif
+
+return
