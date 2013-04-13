@@ -46,6 +46,7 @@ user function portal5()
   HttpSession->logado := .f.
   HttpSession->UserId := nil
   HttpSession->NomeUsuario := nil
+  HttpFreeSession()
   cHtml := redirpage('/u_index.apw?modulo=login')
 
 return cHtml
