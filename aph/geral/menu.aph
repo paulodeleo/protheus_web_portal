@@ -1,10 +1,14 @@
 <div class="well well-small sidebar-nav menu">
   <ul class="nav nav-list">
     <li class="nav-header">Compras</li>
-    <li class="active"><a href="/u_index.apw?modulo=compras&acao=listagem_sc">Solicitações</a></li>
-    <li><a href="javascript:alert('ainda não implementado')">Cotações</a></li>
-    <li><a href="javascript:alert('ainda não implementado')">Pedidos</a></li>
+    <li class="<%= iif(HttpGet->modulo == 'compras' .and. HttpGet->acao == 'listagem_sc', 'active', '') %>"><a href="/u_index.apw?modulo=compras&acao=listagem_sc">Solicitações</a></li>
+    <li class="<%= iif(HttpGet->modulo == 'compras' .and. HttpGet->acao == 'cotacoes', 'active', '') %>"><a href="/u_index.apw?modulo=compras&acao=cotacoes">Cotações</a></li>
+    <li class="<%= iif(HttpGet->modulo == 'compras' .and. HttpGet->acao == 'pedidos', 'active', '') %>"><a href="/u_index.apw?modulo=compras&acao=pedidos">Pedidos</a></li>
     <li class="nav-header">Faturamento</li>
+    <li class="<%= iif(HttpGet->modulo == 'faturamento' .and. HttpGet->acao == 'teste1', 'active', '') %>"><a href="/u_index.apw?modulo=faturamento&acao=teste1">Teste 1</a></li>
+    <li class="<%= iif(HttpGet->modulo == 'faturamento' .and. HttpGet->acao == 'teste2', 'active', '') %>"><a href="/u_index.apw?modulo=faturamento&acao=teste2">Teste 2</a></li>
     <li class="nav-header">RH</li>
+    <li class="<%= iif(HttpGet->modulo == 'rh' .and. HttpGet->acao == 'teste1', 'active', '') %>"><a href="/u_index.apw?modulo=rh&acao=teste1">Teste 1</a></li>
+    <li class="<%= iif(HttpGet->modulo == 'rh' .and. HttpGet->acao == 'teste2', 'active', '') %>"><a href="/u_index.apw?modulo=rh&acao=teste2">Teste 2</a></li>
   </ul>
 </div><!--/.well -->

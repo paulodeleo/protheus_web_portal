@@ -25,7 +25,15 @@ user function index()
 	elseif HttpGet->modulo == 'compras'
 		if HttpGet->acao == nil .or. HttpGet->acao == 'listagem_sc'
 	 		cHtml += u_portal3()
+	 	elseif HttpGet->acao == 'cotacoes'
+	 		cHtml += 'Tela de tesde de compras - cotacoes'
+	 	elseif HttpGet->acao == 'pedidos'
+	 		cHtml += 'Tela de tesde de compras - pedidos'
 	 	endif
+	elseif HttpGet->modulo == 'faturamento'
+	 	cHtml += 'Tela de teste faturamento'
+	elseif HttpGet->modulo == 'rh'
+	 	cHtml += 'Tela de teste RH'
 	else
 		cHtml += u_portal1()
 	endif
