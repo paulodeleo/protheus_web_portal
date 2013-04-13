@@ -10,6 +10,9 @@ user function index()
 	local cHtml
 	WEB EXTENDED INIT cHtml
 
+	// Atualiza empresa e filial
+	u_TrocaEmpresa()
+
 	cHtml := h_cabecalho()
 
   HttpHeadOut->content_type := "text/html; charset=ISO-8859-1" // força encoding e corrige problemas com acentos
