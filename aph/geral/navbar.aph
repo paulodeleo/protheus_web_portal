@@ -40,7 +40,7 @@
 function validaTrocaEmpresa(){
   var empresa = $('#empresa').val();
   var filial = $('#filial').val();
-  if (!confirm("Tem certeza que deseja mudar para a empresa " + empresa + ' e filial ' + filial + '?\n\nA tela inicial do m√≥dulo ser√° recarregada.'))
+  if (!confirm("Tem certeza que deseja mudar para a empresa " + empresa + ' e filial ' + filial + '?\n\nA tela inicial do mÛdulo ser· recarregada.'))
     return false;
 }
 </script>
