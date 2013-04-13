@@ -1,10 +1,26 @@
 <div class="navbar">
   <div class="navbar-inner">
     <a class="brand" href="/u_index.apw">
-    <img src="/img/simbolo_sms.png">
-    Portal Protheus
+      <img src="/img/simbolo_sms.png"> Portal Protheus
     </a>
     <ul class="nav pull-right">
+      <li>
+
+        <form action="/u_index.apw" method="get" id="form-empresa-filial" class="form-inline">
+          <input type="hidden" name="modulo" value="<%= HttpGet->modulo %>">
+            Empresa: 
+            <select id="empresa" name="empresa" class="input-mini">
+              <option <%= iif(HttpSession->empresa == '99', 'selected', '') %> value="99">99</option>
+            </select>
+            Filial: 
+            <select id="filial" name="filial" class="input-mini">
+              <option <%= iif(HttpSession->filial == '01', 'selected', '') %> value="01">01</option>
+            </select>
+            <button class="btn btn-small" type="submit">Atualizar</button>
+        </form>
+
+      </li>
+      <li class="divider-vertical"></li>
       <li>
         <a href="/u_index.apw" onClick="javascript: return false;">
           <i class="icon-user"></i> <%= HttpSession->NomeUsuario %>
