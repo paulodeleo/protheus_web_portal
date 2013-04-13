@@ -6,7 +6,7 @@
     <ul class="nav pull-right">
       <li>
 
-        <form action="/u_index.apw" method="get" id="form-empresa-filial" class="form-inline">
+        <form action="/u_index.apw" method="get" id="form-empresa-filial" class="form-inline" onSubmit="return validaTrocaEmpresa();">
           <input type="hidden" name="modulo" value="<%= HttpGet->modulo %>">
             Empresa: 
             <select id="empresa" name="empresa" class="input-mini">
@@ -35,3 +35,12 @@
     </ul>   
   </div>
 </div>
+
+<script>
+function validaTrocaEmpresa(){
+  var empresa = $('#empresa').val();
+  var filial = $('#filial').val();
+  if (!confirm("Tem certeza que deseja mudar para a empresa " + empresa + ' e filial ' + filial + '?\n\nA tela inicial do módulo será recarregada.'))
+    return false;
+}
+</script>
