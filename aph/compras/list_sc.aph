@@ -1,35 +1,43 @@
-<h3>Listagem de Solicitações de Compras</h3>
-
-<form class="form-inline" action="/u_index.apw" method="get">
-  <input type="hidden" name="modulo" value="compras">
-  <input type="hidden" name="acao" value="listagem_sc">
-  <p>
-    Status:
-    <select name="status">
-      <option value=""></option>
-      <option value="1" <%= iif(HttpGet->status == '1', 'selected', '') %>>Totalmente Atendido</option>
-      <option value="2"<%= iif(HttpGet->status == '2', 'selected', '') %>>Solicitacao de Importacao</option>
-      <option value="3"<%= iif(HttpGet->status == '3', 'selected', '') %>>Eliminada por Residuo</option>
-      <option value="4"<%= iif(HttpGet->status == '4', 'selected', '') %>>Em Aberto</option>
-      <option value="5"<%= iif(HttpGet->status == '5', 'selected', '') %>>Rejeitada</option>
-      <option value="6"<%= iif(HttpGet->status == '6', 'selected', '') %>>Bloqueada</option>
-      <option value="7"<%= iif(HttpGet->status == '7', 'selected', '') %>>Pedido Colocado</option>
-      <option value="8"<%= iif(HttpGet->status == '8', 'selected', '') %>>Pedido Colocado Parcial</option>
-      <option value="9"<%= iif(HttpGet->status == '9', 'selected', '') %>>Processo de Cotacao</option>
-      <option value="10"<%= iif(HttpGet->status == '10', 'selected', '') %>>Produto Importado</option>
-    </select>
-    <input type="submit" value="Filtrar" class="btn btn-primary">
-  </p>
-</form>
+<div class="row">
+  <div class="span10">
+    <h3>Listagem de Solicitações de Compras</h3>
+  </div>
+  <div class="span2">
+    <a href="u_index.apw?modulo=compras&acao=form_incluir" class="btn btn-primary" onClick="javascript:alert('ainda não implementado'); return false;">Incluir SC</a>
+  </div>
+</div>
+<div class="row">
+    <form class="form-inline" action="/u_index.apw" method="get">
+      <input type="hidden" name="modulo" value="compras">
+      <input type="hidden" name="acao" value="listagem_sc">
+      <p>
+        Status:
+        <select name="status">
+          <option value=""></option>
+          <option value="1" <%= iif(HttpGet->status == '1', 'selected', '') %>>Totalmente Atendido</option>
+          <option value="2"<%= iif(HttpGet->status == '2', 'selected', '') %>>Solicitacao de Importacao</option>
+          <option value="3"<%= iif(HttpGet->status == '3', 'selected', '') %>>Eliminada por Residuo</option>
+          <option value="4"<%= iif(HttpGet->status == '4', 'selected', '') %>>Em Aberto</option>
+          <option value="5"<%= iif(HttpGet->status == '5', 'selected', '') %>>Rejeitada</option>
+          <option value="6"<%= iif(HttpGet->status == '6', 'selected', '') %>>Bloqueada</option>
+          <option value="7"<%= iif(HttpGet->status == '7', 'selected', '') %>>Pedido Colocado</option>
+          <option value="8"<%= iif(HttpGet->status == '8', 'selected', '') %>>Pedido Colocado Parcial</option>
+          <option value="9"<%= iif(HttpGet->status == '9', 'selected', '') %>>Processo de Cotacao</option>
+          <option value="10"<%= iif(HttpGet->status == '10', 'selected', '') %>>Produto Importado</option>
+        </select>
+        <input type="submit" value="Filtrar" class="btn btn-primary">
+      </p>
+    </form>
+</div>
 
 <table class="table table-hover table-striped">
   <tr>
+    <th>Status</th>
     <th>Nº SC</th>
     <th>Item</th>
     <th>Produto</th>
     <th>Un. Med.</th>
     <th>Qtd.</th>
-    <th>Status</th>
     <th>Ações</th>
   </tr>
 
@@ -37,15 +45,15 @@
   while !SC1->(eof())   
     %>
     <tr>
+      <td>
+        <% oSC := SC():New(SC1->C1_NUM) %>
+        <i class="icon-circle icon-large legenda sc-status-<%= oSC:Status() %>"></i>
+      </td>
       <td><%= SC1->C1_NUM %></td>
       <td><%= SC1->C1_ITEM %></td>
       <td><%= SC1->C1_PRODUTO %></td>
       <td><%= SC1->C1_UM %></td>
       <td><%= SC1->C1_QUANT %></td>
-      <td>
-        <% oSC := SC():New(SC1->C1_NUM) %>
-        <i class="icon-circle icon-large legenda sc-status-<%= oSC:Status() %>"></i>
-      </td>
       <td>
         <a href="javascript:alert('ainda não implementado')"><i class="icon-search icon-large no-link"></i></a>
         <a href="javascript:alert('ainda não implementado')"><i class="icon-edit icon-large no-link"></i></a>
@@ -58,8 +66,6 @@
   %>
 
 </table>
-
-<input type="submit" value="Incluir SC" class="btn btn-primary" onClick="javascript:alert('ainda não implementado'); return false;">
 
 <div id="legenda-sc" class="hide">
   <i class="icon-circle icon-large legenda sc-status-1"></i> Totalmente Atendido<br>
