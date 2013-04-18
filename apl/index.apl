@@ -28,6 +28,8 @@ user function index()
 	elseif HttpGet->modulo == 'compras'
 		if HttpGet->acao == nil .or. HttpGet->acao == 'listagem_sc'
 	 		cHtml += u_portal3()
+	 	elseif HttpGet->acao == 'detalhe_sc'
+	 		cHtml += u_portal6()
 	 	elseif HttpGet->acao == 'cotacoes'
 	 		cHtml += 'Tela de tesde de compras - cotacoes'
 	 	elseif HttpGet->acao == 'pedidos'
