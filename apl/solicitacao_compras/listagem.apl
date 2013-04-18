@@ -8,7 +8,10 @@ user function portal3()
 
   local cHtml := ''
 
-  _cQuery := "select * from " + RetSqlName("SC1") + " where D_E_L_E_T_ <> '*' "
+  _cQuery := "select SC1.*, SB1.B1_DESC from " + RetSqlName("SC1") + " SC1 "
+  _cQuery += "left join " + RetSqlName("SB1") + " SB1 on "
+  _cQuery += "C1_PRODUTO = B1_COD "
+  _cQuery += "where SC1.D_E_L_E_T_ <> '*' AND SB1.D_E_L_E_T_ <> '*' AND C1_FILIAL = B1_FILIAL "
   if HttpGet->status == '1'
     _cQuery += "and C1_FLAGGCT = 1 "
   elseif HttpGet->status == '2'

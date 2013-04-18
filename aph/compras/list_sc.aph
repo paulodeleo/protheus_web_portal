@@ -51,7 +51,7 @@
       </td>
       <td><%= SC1->C1_NUM %></td>
       <td><%= SC1->C1_ITEM %></td>
-      <td><%= SC1->C1_PRODUTO %></td>
+      <td><%= SC1->C1_PRODUTO %> - <%= SC1->B1_DESC %></td>
       <td><%= SC1->C1_UM %></td>
       <td><%= SC1->C1_QUANT %></td>
       <td>
