@@ -64,6 +64,7 @@ USER Function ResetWebEx(cFnName)
 Local cHtmlConn := ''
 //conout('Terminei de executar '+ cFnName) // não funciona, cFnName está undefined?
 //conout('Terminei de executar')
+HttpSession->alert := nil
 Return cHtmlConn
 
 /* -------------------------------------------------------------------------------
