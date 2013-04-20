@@ -56,7 +56,7 @@
       <td><%= SC1->C1_QUANT %></td>
       <td>
         <a href="/u_index.apw?modulo=compras&acao=detalhe_sc&codigo=<%= SC1->C1_NUM %>"><i class="icon-search icon-large no-link"></i></a>
-        <a href="javascript:alert('ainda não implementado')"><i class="icon-edit icon-large no-link"></i></a>
+        <a href="/u_index.apw?modulo=compras&acao=edicao_sc&codigo=<%= SC1->C1_NUM %>"><i class="icon-edit icon-large no-link"></i></a>
         <a href="javascript:excluirSC('<%= SC1->C1_NUM %>')"><i class="icon-remove icon-large no-link"></i></a>
       </td>
     </tr>

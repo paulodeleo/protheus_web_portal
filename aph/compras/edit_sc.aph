@@ -1,0 +1,95 @@
+<form action="u_index.apw?modulo=compras&acao=atualizar_sc" method="post" class="form-horizontal">
+  <input type="hidden" name="codigo" value="<%= SC1->C1_NUM %>">
+  <fieldset>
+    <legend>Edição de solicitação de compras</legend>
+    
+    <%
+    cClasseAlerta := iif(HttpSession->alert <> nil, HttpSession->alert, '')
+    cClasseVisivel := iif(HttpSession->alert <> nil,'', 'hide')
+    %>
+    <div class="alert alert-<%= cClasseAlerta %> <%= cClasseVisivel %>">
+    <% if cClasseAlerta == 'success' %>
+        <b>Solicitação de compras alterada com sucesso!</b>
+    <% elseif cClasseAlerta == 'error' %>
+        <b>Ocorreram erros que impediram a atualização da solicitação de compras:</b>
+        <ul>
+          <% For i := 1 to len(aErros) %>
+            <li><%= aErros[i] %></li>
+          <% Next i %>
+        </ul>
+    <% endif %>
+    </div>
+
+    <div class="control-group controls-row">
+      <label class="control-label" for="C1_NUM">Nº da SC:</label>
+      <div class="controls">
+        <input type="text" name="C1_NUM" id="C1_NUM" value="<%= SC1->C1_NUM %>" class="span2" disabled>
+      </div>
+      <label class="control-label offset2" for="C1_UNIDREQ">Un. Req.:</label>
+      <div class="controls">
+        <input type="text" name="C1_UNIDREQ" id="C1_UNIDREQ" value="<%= SC1->C1_UNIDREQ %>" class="span2">
+      </div>
+    </div>
+    <div class="control-group controls-row">
+      <label class="control-label" for="C1_SOLICIT">Solicitante:</label>
+      <div class="controls">
+        <input type="text" name="C1_SOLICIT" id="C1_SOLICIT" value="<%= SC1->C1_SOLICIT %>" class="span2" disabled>
+      </div>
+      <label class="control-label offset2" for="C1_CODCOMP">Cod. Comprador:</label>
+      <div class="controls">
+        <input type="text" name="C1_CODCOMP" id="C1_CODCOMP" value="<%= SC1->C1_CODCOMP %> - <%= X3Combo('C1_CODCOMP', SC1->C1_CODCOMP) %>" class="span2">
+      </div>
+    </div>
+    <div class="control-group controls-row">
+      <label class="control-label" for="C1_EMISSAO">Dt. Emissão:</label>
+      <div class="controls">
+        <input type="text" name="C1_EMISSAO" id="C1_EMISSAO" value="<%= stod(SC1->C1_EMISSAO) %>" class="span2">
+      </div>
+      <label class="control-label offset2" for="C1_FILIAL">Filial de entrega:</label>
+      <div class="controls">
+        <input type="text" name="C1_FILIAL" id="C1_FILIAL" value="<%= SC1->C1_FILIAL %> - <%= FWFilialName(HttpSession->empresa, SC1->C1_FILIAL, 1) %>" class="span2">
+      </div>
+    </div>
+  </fieldset>
+
+  <table class="table table-hover table-striped">
+    <tr>
+      <th>Item</th>
+      <th>Produto</th>
+      <th>Un. Med.</th>
+      <th>Qtd.</th>
+      <th>2ª Un. Med.</th>
+      <th>Qtd. 2ª Un. Med.</th>
+      <th>Necessidade</th>
+      <th>Armazém</th>
+      <th>Observações</th>
+    </tr>
+
+    <%
+    SC1->(dbgotop())
+    while !SC1->(eof())   
+      %>
+      <tr>
+        <td><%= SC1->C1_ITEM %></td>
+        <td><%= SC1->C1_PRODUTO %> - <%= SC1->B1_DESC %></td>
+        <td><%= SC1->C1_UM %></td>
+        <td><%= SC1->C1_QUANT %></td>
+        <td><%= SC1->C1_SEGUM %></td>
+        <td><%= SC1->C1_QTSEGUM %></td>
+        <td><%= stod(SC1->C1_DATPRF) %></td>
+        <td><%= SC1->C1_LOCAL %></td>
+        <td><%= SC1->C1_OBS %></td>
+      </tr>
+      <%
+      SC1->(dbskip())
+    end
+    %>
+
+  </table>
+
+  <div>
+    <input type="submit" class="btn btn-primary" value="Gravar Solicitação">
+    <a href="u_index.apw?modulo=compras&acao=listagem_sc" class="btn">Voltar para listagem de SC</a>
+  </div>
+
+</form>

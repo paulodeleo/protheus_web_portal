@@ -30,6 +30,10 @@ user function index()
 	 		cHtml += u_portal3()
 	 	elseif HttpGet->acao == 'detalhe_sc'
 	 		cHtml += u_portal6()
+	 	elseif HttpGet->acao == 'edicao_sc'
+	 		cHtml += u_portal7()
+	 	elseif HttpGet->acao == 'atualizar_sc'
+	 		cHtml += u_portal8()
 	 	elseif HttpGet->acao == 'cotacoes'
 	 		cHtml += 'Tela de tesde de compras - cotacoes'
 	 	elseif HttpGet->acao == 'pedidos'
