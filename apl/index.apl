@@ -43,6 +43,10 @@ user function index()
 	 	cHtml += 'Tela de teste faturamento'
 	elseif HttpGet->modulo == 'rh'
 	 	cHtml += 'Tela de teste RH'
+	elseif HttpGet->modulo == 'f3'
+		if HttpGet->acao == 'compradores'
+	 		cHtml += u_portal9()
+	 	endif
 	else
 		cHtml += u_portal1()
 	endif
