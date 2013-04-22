@@ -42,8 +42,9 @@
     </div>
     <div class="control-group controls-row">
       <label class="control-label" for="C1_EMISSAO">Dt. Emissão:</label>
-      <div class="controls">
-        <input type="text" name="C1_EMISSAO" id="C1_EMISSAO" value="<%= stod(SC1->C1_EMISSAO) %>" class="span2">
+      <div class="controls date">
+        <input type="text" name="C1_EMISSAO" id="C1_EMISSAO" value="<%= stod(SC1->C1_EMISSAO) %>"class="span2 datepicker">
+        <span class="add-on"><i class="icon-calendar"></i></span>
       </div>
       <label class="control-label offset2" for="C1_FILIAL">Filial de entrega:</label>
       <div class="controls">
@@ -93,3 +94,16 @@
   </div>
 
 </form>
+
+<script>
+$(document).ready(function(){  
+  $('.datepicker').datepicker({
+    language: "pt-BR", 
+    format: "dd/mm/yyyy",
+    autoclose: true,
+    todayBtn: 'linked',
+    todayHighlight: true
+  });
+});
+
+</script>
