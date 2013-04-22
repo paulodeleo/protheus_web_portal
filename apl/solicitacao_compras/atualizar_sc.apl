@@ -19,6 +19,7 @@ user function portal8()
   aadd(aCabec,{"C1_NUM", HttpPost->codigo})
   aadd(aCabec,{"C1_SOLICIT","Administrador"}) //TODO: pegar o usuário logado na inclusão? não alterar?
   aadd(aCabec,{"C1_EMISSAO", CTOD(HttpPost->C1_EMISSAO)})
+  aadd(aCabec,{"C1_CODCOMP", HttpPost->C1_CODCOMP})
 
   aadd(aLinha,{"C1_ITEM"   , '0001', Nil})     
   aadd(aLinha,{"C1_PRODUTO", "0201.0090", Nil})      

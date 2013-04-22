@@ -13,7 +13,7 @@
     while !SY1->(eof())   
       %>
       <tr>
-        <td><a href="#" onClick="selecionarComprador('<%= SY1->Y1_COD %> - <%= SY1->Y1_NOME %>')"><%= SY1->Y1_COD %></a></td>
+        <td><a href="#" onClick="selecionarComprador('<%= SY1->Y1_COD %>', '<%= SY1->Y1_NOME %>')"><%= SY1->Y1_COD %></a></td>
         <td><%= SY1->Y1_NOME %></td>
       </tr>
       <%

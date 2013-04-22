@@ -37,7 +37,8 @@
       </div>
       <label class="control-label offset2" for="C1_CODCOMP">Cod. Comprador:</label>
       <div class="controls">
-        <input type="text" name="C1_CODCOMP" id="C1_CODCOMP" value="<%= SC1->C1_CODCOMP %>" class="span3">
+        <input type="hidden" name="C1_CODCOMP" id="C1_CODCOMP" value="<%= SC1->C1_CODCOMP %>">
+        <input type="text" name="C1_CODCOMP-visual" id="C1_CODCOMP-visual" value="<%= SC1->C1_CODCOMP %> - <%= SY1->Y1_NOME %>" class="span4" disabled>
         <a href="#" onClick="abrirF3Compradores();"><i class="icon-search icon-large no-link"></i></a>
       </div>
     </div>
@@ -122,9 +123,10 @@ function abrirF3Compradores(){
 }
 
 // Função para selecionar comprador após escolher em popup modal f3
-function selecionarComprador(codigo){
+function selecionarComprador(codigo, descricao){
   // atualiza valor no campo
   $('#C1_CODCOMP').val(codigo);
+  $('#C1_CODCOMP-visual').val(codigo + " - " + descricao);
   // fecha f3
   $modal.modal('hide');
 }
