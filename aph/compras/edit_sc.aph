@@ -37,7 +37,8 @@
       </div>
       <label class="control-label offset2" for="C1_CODCOMP">Cod. Comprador:</label>
       <div class="controls">
-        <input type="text" name="C1_CODCOMP" id="C1_CODCOMP" value="<%= SC1->C1_CODCOMP %> - <%= X3Combo('C1_CODCOMP', SC1->C1_CODCOMP) %>" class="span2">
+        <input type="text" name="C1_CODCOMP" id="C1_CODCOMP" value="<%= SC1->C1_CODCOMP %>" class="span3">
+        <a href="#" onClick="abrirF3Compradores();"><i class="icon-search icon-large no-link"></i></a>
       </div>
     </div>
     <div class="control-group controls-row">
@@ -95,6 +96,9 @@
 
 </form>
 
+<!-- Div oculta para modais F3 -->
+<div id="ajax-modal" class="modal hide fade" tabindex="-1" style="display: none;" aria-hidden="true"></div>
+
 <script>
 $(document).ready(function(){  
   $('.datepicker').datepicker({
@@ -105,5 +109,24 @@ $(document).ready(function(){
     todayHighlight: true
   });
 });
+
+// Função para abrir popup modal f3 de compradores
+var $modal = $('#ajax-modal');
+function abrirF3Compradores(){
+  // create the backdrop and wait for next modal to be triggered
+  $('body').modalmanager('loading');
+  var urlF3 = "/u_index.apw?modulo=f3&acao=compradores&naousarlayout=1";
+  $modal.load(urlF3, '', function(){
+    $modal.modal();
+  });
+}
+
+// Função para selecionar comprador após escolher em popup modal f3
+function selecionarComprador(codigo){
+  // atualiza valor no campo
+  $('#C1_CODCOMP').val(codigo);
+  // fecha f3
+  $modal.modal('hide');
+}
 
 </script>
