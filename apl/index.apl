@@ -13,7 +13,7 @@ user function index()
 	// Atualiza empresa e filial
 	u_TrocaEmpresa()
 
-	cHtml := h_cabecalho()
+	cHtml := iif(HttpGet->NaoUsarLayout <> nil, '', h_cabecalho())
 
   HttpHeadOut->content_type := "text/html; charset=ISO-8859-1" // força encoding e corrige problemas com acentos
 
@@ -47,7 +47,7 @@ user function index()
 		cHtml += u_portal1()
 	endif
 
-	cHtml += h_rodape()
+	cHtml += iif(HttpGet->NaoUsarLayout <> nil, '', h_rodape())
 
 	WEB EXTENDED END
 
