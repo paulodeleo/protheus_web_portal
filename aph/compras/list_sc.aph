@@ -30,17 +30,20 @@
     </form>
 </div>
 
-<table class="table table-hover table-striped">
-  <tr>
-    <th>Status</th>
-    <th>Nº SC</th>
-    <th>Item</th>
-    <th>Produto</th>
-    <th>Un. Med.</th>
-    <th>Qtd.</th>
-    <th>Ações</th>
-  </tr>
+<table class="table table-hover table-striped table-fixed-header">
+  <thead class="header">
+    <tr>
+      <th>Status</th>
+      <th>Nº SC</th>
+      <th>Item</th>
+      <th>Produto</th>
+      <th>Un. Med.</th>
+      <th>Qtd.</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
 
+  <tbody>
   <%
   while !SC1->(eof())   
     %>
@@ -64,6 +67,7 @@
     SC1->(dbskip())
   end
   %>
+  </tbody>
 
 </table>
 
@@ -82,10 +86,16 @@
 
 <script>
 $(document).ready(function(){  
+
+  // Congela cabeçalho da tabela na rolagem
+  $('.table-fixed-header').fixedHeader();
+
+  // Adiciona tooltips explicativos nos botões da coluna de ação
   $('.icon-search').tooltip({"title": "Detalhes"});
   $('.icon-edit').tooltip({"title": "Editar"});
   $('.icon-remove').tooltip({"title": "Remover"});
 
+  // Adiciona popover de legenda
   $('.legenda').popover({
     "trigger": "hover", 
     "placement": "bottom",
@@ -96,6 +106,7 @@ $(document).ready(function(){
 
 });
 
+// Função para realizar a exclusão de SC
 function excluirSC(num){
   if (confirm('Tem certeza que deseja excluir a SC' + num + '?')) {
     alert('ainda não implementado');
