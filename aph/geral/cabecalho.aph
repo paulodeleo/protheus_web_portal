@@ -9,6 +9,7 @@
 <link href="/css/datepicker.css" rel="stylesheet">
 <link href="/css/bootstrap-modal.css" rel="stylesheet">
 <link href="/css/portal.css" rel="stylesheet">
+<link href='/css/table-fixed-header.css' rel='stylesheet' />
 <script src="/js/jquery-1.8.3.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/chosen.jquery.min.js"></script>
@@ -16,6 +17,7 @@
 <script src="/js/bootstrap-datepicker.pt-BR.js"></script>
 <script src="/js/bootstrap-modal.js"></script>
 <script src="/js/bootstrap-modalmanager.js"></script>
+<script src='/js/table-fixed-header.js'></script>
 </head>
 <body>
 
