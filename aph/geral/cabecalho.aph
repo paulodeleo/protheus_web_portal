@@ -18,6 +18,7 @@
 <script src="/js/bootstrap-modal.js"></script>
 <script src="/js/bootstrap-modalmanager.js"></script>
 <script src='/js/table-fixed-header.js'></script>
+<script src='/js/jquery.hotkeys.js'></script>
 </head>
 <body>
 
