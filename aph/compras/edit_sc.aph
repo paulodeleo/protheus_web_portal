@@ -38,7 +38,7 @@
       <label class="control-label offset2" for="C1_CODCOMP">Cod. Comprador:</label>
       <div class="controls">
         <input type="hidden" name="C1_CODCOMP" id="C1_CODCOMP" value="<%= SC1->C1_CODCOMP %>">
-        <input type="text" name="C1_CODCOMP-visual" id="C1_CODCOMP-visual" value="<%= SC1->C1_CODCOMP %> - <%= SY1->Y1_NOME %>" class="span4" disabled>
+        <input type="text" name="C1_CODCOMP-visual" id="C1_CODCOMP-visual" value="<%= SC1->C1_CODCOMP %> - <%= SY1->Y1_NOME %>" class="span4" >
         <a href="#" onClick="abrirF3Compradores();"><i class="icon-search icon-large no-link"></i></a>
       </div>
     </div>
@@ -102,6 +102,8 @@
 
 <script>
 $(document).ready(function(){  
+
+  // Adiciona datepicker aos campos marcados
   $('.datepicker').datepicker({
     language: "pt-BR", 
     format: "dd/mm/yyyy",
@@ -109,6 +111,13 @@ $(document).ready(function(){
     todayBtn: 'linked',
     todayHighlight: true
   });
+
+  // Abre busca F3 de compradores pressionando tecla F3
+  $('#C1_CODCOMP-visual').bind('keydown', 'f3', function(e){
+    abrirF3Compradores();
+    e.preventDefault(); // evita que o navegador faça a função padrão da tecla, no caso F3, que dispara a busca no chrome
+  });
+
 });
 
 // Função para abrir popup modal f3 de compradores
