@@ -35,10 +35,10 @@
       <div class="controls">
         <input type="text" name="C1_SOLICIT" id="C1_SOLICIT" value="<%= SC1->C1_SOLICIT %>" class="span2" disabled>
       </div>
-      <label class="control-label offset2" for="C1_CODCOMP">Cod. Comprador:</label>
+      <label class="control-label offset2" for="C1_CODCOMP_visual">Cod. Comprador:</label>
       <div class="controls">
-        <input type="hidden" name="C1_CODCOMP" id="C1_CODCOMP" value="<%= SC1->C1_CODCOMP %>">
-        <input type="text" name="C1_CODCOMP-visual" id="C1_CODCOMP-visual" value="<%= SC1->C1_CODCOMP %> - <%= SY1->Y1_NOME %>" class="span4" >
+        <input type="hidden" name="C1_CODCOMP" id="C1_CODCOMP" value="<%= alltrim(SC1->C1_CODCOMP) %>">
+        <input type="text" name="C1_CODCOMP_visual" id="C1_CODCOMP_visual" value="<%= alltrim(SC1->C1_CODCOMP + ' - ' + SY1->Y1_NOME) %>" class="span4" >
         <a href="#" onClick="abrirF3Compradores();"><i class="icon-search icon-large no-link"></i></a>
       </div>
     </div>
@@ -113,7 +113,7 @@ $(document).ready(function(){
   });
 
   // Abre busca F3 de compradores pressionando tecla F3
-  $('#C1_CODCOMP-visual').bind('keydown', 'f3', function(e){
+  $('#C1_CODCOMP_visual').bind('keydown', 'f3', function(e){
     abrirF3Compradores();
     e.preventDefault(); // evita que o navegador faça a função padrão da tecla, no caso F3, que dispara a busca no chrome
   });
@@ -135,7 +135,7 @@ function abrirF3Compradores(){
 function selecionarComprador(codigo, descricao){
   // atualiza valor no campo
   $('#C1_CODCOMP').val(codigo);
-  $('#C1_CODCOMP-visual').val(codigo + " - " + descricao);
+  $('#C1_CODCOMP_visual').val(codigo + " - " + descricao);
   // fecha f3
   $modal.modal('hide');
 }
