@@ -80,6 +80,7 @@
       <th>Necessidade</th>
       <th>Armazém</th>
       <th>Observações</th>
+      <th>Ações</th>
     </tr>
 
     <%
@@ -96,6 +97,9 @@
         <td><%= stod(SC1->C1_DATPRF) %></td>
         <td><%= SC1->C1_LOCAL %></td>
         <td><%= SC1->C1_OBS %></td>
+        <td>
+          <a href="#" onClick="abrirPopupEdicaoItem('<%= SC1->C1_NUM %>', '<%= SC1->C1_ITEM %>'); return false;"><i class="icon-edit icon-large no-link"></i></a>
+        </td>
       </tr>
       <%
       SC1->(dbskip())
@@ -132,6 +136,12 @@ $(document).ready(function(){
     e.preventDefault(); // evita que o navegador faça a função padrão da tecla, no caso F3, que dispara a busca no chrome
   });
 
+  // Abre busca F3 de produtos pressionando tecla F3
+  $('#C1_PRODUTO_visual').bind('keydown', 'f3', function(e){
+    abrirF3Produtos();
+    e.preventDefault(); // evita que o navegador faça a função padrão da tecla, no caso F3, que dispara a busca no chrome
+  });
+
 });
 
 // Função para abrir popup modal f3 de compradores
@@ -144,6 +154,15 @@ function abrirF3Compradores(){
     $modal.modal();
   });
 }
+
+function abrirPopupEdicaoItem(codigo, item){
+  $('body').modalmanager('loading');
+  var urlF3 = "/u_index.apw?modulo=compras&acao=edicao_item_sc&codigo=" + codigo + "&item=" + item + "&naousarlayout=1";
+  $modal.load(urlF3, '', function(){
+    $modal.modal({width: $(window).width() - 100 });
+  });
+}
+
 
 // Função para selecionar comprador após escolher em popup modal f3
 function selecionarComprador(codigo, descricao){

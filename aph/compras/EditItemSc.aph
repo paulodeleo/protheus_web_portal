@@ -1,0 +1,125 @@
+<form id="form_edicao_item_sc" method="post" class="form-horizontal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4>Edição de Item de Solicitação de Compras</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row-fluid">
+      <div class="span6">
+        <div class="control-group">
+          <label class="control-label" for="C1_ITEM">Item da SC:</label>
+          <div class="controls">
+            <input type="text" name="C1_ITEM" id="C1_ITEM" value="<%= SC1->C1_ITEM %>" class="span3" disabled>
+          </div>
+        </div>
+        <div class="control-group input-append" style="display: block">
+          <label class="control-label" for="C1_PRODUTO_visual">Produto:</label>
+          <div class="controls">
+            <input type="hidden" name="C1_PRODUTO" id="C1_PRODUTO" value="<%= SC1->C1_PRODUTO %>">
+            <input type="text" name="C1_PRODUTO_visual" id="C1_PRODUTO_visual" value="<%= alltrim(SC1->C1_PRODUTO) %> - <%= alltrim(SC1->B1_DESC) %>" class="span10">
+            <a href="#" onClick="abrirF3Produtos();"><i class="icon-search icon-large no-link add-on"></i></a>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="C1_UM">Un. Medida:</label>
+          <div class="controls">
+            <input type="text" name="C1_UM" id="C1_UM" value="<%= SC1->C1_UM %>" class="span3" disabled>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="C1_QUANT">Quantidade:</label>
+          <div class="controls">
+            <input type="text" name="C1_QUANT" id="C1_QUANT" value="<%= SC1->C1_QUANT %>" class="span3">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="C1_SEGUM">2ª Un. Medida:</label>
+          <div class="controls">
+            <input type="text" name="C1_SEGUM" id="C1_SEGUM" value="<%= SC1->C1_SEGUM %>" class="span3" disabled>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="C1_QTSEGUM">Qtd. 2ª Unid. Med.:</label>
+          <div class="controls">
+            <input type="text" name="C1_QTSEGUM" id="C1_QTSEGUM" value="<%= SC1->C1_QTSEGUM %>" class="span3">
+          </div>
+        </div>
+        <div class="control-group input-append" style="display: block">
+          <label class="control-label" for="C1_DATPRF">Necessidade:</label>
+          <div class="controls date ">
+            <input type="text" name="C1_DATPRF" id="C1_DATPRF" value="<%= stod(SC1->C1_DATPRF) %>"class="span4 datepicker">
+            <span class="add-on"><i class="icon-calendar"></i></span>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="C1_LOCAL">Local:</label>
+          <div class="controls">
+            <input type="text" name="C1_LOCAL" id="C1_LOCAL" value="<%= SC1->C1_LOCAL %>" class="span3">
+          </div>
+        </div>
+      </div>
+
+      <div class="span6">
+        <div class="control-group input-append" style="display: block">
+          <label class="control-label" for="C1_CC_visual">Centro de Custo:</label>
+          <div class="controls ">
+            <input type="hidden" name="C1_CC" id="C1_CC" value="<%= alltrim(SC1->C1_CC) %>">
+            <input type="text" name="C1_CC_visual" id="C1_CC_visual" value="<%= alltrim(SC1->C1_CC) %>" class="span7" >
+            <a href="#" onClick="abrirF3CentroDeCusto();"><i class="icon-search icon-large no-link add-on"></i></a>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="C1_CONTA">Conta Contábil:</label>
+          <div class="controls">
+            <input type="text" name="C1_CONTA" id="C1_CONTA" value="<%= SC1->C1_CONTA %>" class="span3">
+          </div>
+        </div>
+        <div class="control-group input-append" style="display: block">
+          <label class="control-label" for="C1_DATA">Data:</label>
+          <div class="controls">
+            <input type="text" name="C1_DATA" id="C1_DATA" value="" class="span3">
+          </div>
+        </div>
+        <div class="control-group input-append" style="display: block">
+          <label class="control-label" for="C1_FORNECE_visual">Fornecedor:</label>
+          <div class="controls ">
+            <input type="hidden" name="C1_FORNECE" id="C1_FORNECE" value="<%= alltrim(SC1->C1_FORNECE) %>">
+            <input type="text" name="C1_FORNECE_visual" id="C1_FORNECE_visual" value="<%= alltrim(SC1->C1_FORNECE) %>" class="span7" >
+            <a href="#" onClick="abrirF3Fornecedor();"><i class="icon-search icon-large no-link add-on"></i></a>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="C1_LOJA">Loja:</label>
+          <div class="controls">
+            <input type="text" name="C1_LOJA" id="C1_LOJA" value="<%= SC1->C1_LOJA %>" class="span3">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="C1_ITEMCTA">Item conta.:</label>
+          <div class="controls">
+            <input type="text" name="C1_ITEMCTA" id="C1_ITEMCTA" value="<%= SC1->C1_ITEMCTA %>" class="span3">
+          </div>
+        </div>
+        <div class="control-group input-append" style="display: block">
+          <label class="control-label" for="C1_OP_visual">Nº Ord. Produção:</label>
+          <div class="controls ">
+            <input type="hidden" name="C1_OP" id="C1_OP" value="<%= alltrim(SC1->C1_OP) %>">
+            <input type="text" name="C1_OP_visual" id="C1_OP_visual" value="<%= alltrim(SC1->C1_OP) %>" class="span7" >
+            <a href="#" onClick="abrirF3OrdemDeProducao();"><i class="icon-search icon-large no-link add-on"></i></a>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="C1_QTDORIG">Qtd. Original:</label>
+          <div class="controls">
+            <input type="text" name="C1_QTDORIG" id="C1_QTDORIG" value="<%= SC1->C1_QTDORIG %>" class="span3" disabled>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+  <div class="modal-footer">
+    <input type="submit" class="btn btn-primary" value="Confirmar">
+    <button type="button" data-dismiss="modal" class="btn">Cancelar</button>
+  </div>
