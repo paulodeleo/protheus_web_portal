@@ -120,6 +120,6 @@
   </div>
 </form>
   <div class="modal-footer">
-    <input type="submit" class="btn btn-primary" value="Confirmar">
+    <button type="button" class="btn btn-primary" onClick="atualizarItem();">Confirmar</button>
     <button type="button" data-dismiss="modal" class="btn">Cancelar</button>
   </div>

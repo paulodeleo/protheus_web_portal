@@ -69,7 +69,7 @@
 
   </fieldset>
 
-  <table class="table table-hover table-striped">
+  <table id="itens_sc" class="table table-hover table-striped">
     <tr>
       <th>Item</th>
       <th>Produto</th>
@@ -87,16 +87,16 @@
     SC1->(dbgotop())
     while !SC1->(eof())   
       %>
-      <tr>
-        <td><%= SC1->C1_ITEM %></td>
-        <td><%= SC1->C1_PRODUTO %> - <%= SC1->B1_DESC %></td>
-        <td><%= SC1->C1_UM %></td>
-        <td><%= SC1->C1_QUANT %></td>
-        <td><%= SC1->C1_SEGUM %></td>
-        <td><%= SC1->C1_QTSEGUM %></td>
-        <td><%= stod(SC1->C1_DATPRF) %></td>
-        <td><%= SC1->C1_LOCAL %></td>
-        <td><%= SC1->C1_OBS %></td>
+      <tr id="<%= SC1->C1_ITEM %>" class="item_sc">
+        <td class="C1_ITEM_item"><%= SC1->C1_ITEM %></td>
+        <td class="C1_PRODUTO_item"><%= SC1->C1_PRODUTO %> - <%= SC1->B1_DESC %></td>
+        <td class="C1_UM_item"><%= SC1->C1_UM %></td>
+        <td class="C1_QUANT_item"><%= SC1->C1_QUANT %></td>
+        <td class="C1_SEGUM_item"><%= SC1->C1_SEGUM %></td>
+        <td class="C1_QTSEGUM_item"><%= SC1->C1_QTSEGUM %></td>
+        <td class="C1_DATPRF_item"><%= stod(SC1->C1_DATPRF) %></td>
+        <td class="C1_LOCAL_item"><%= SC1->C1_LOCAL %></td>
+        <td class="C1_OBS_item"><%= SC1->C1_OBS %></td>
         <td>
           <a href="#" onClick="abrirPopupEdicaoItem('<%= SC1->C1_NUM %>', '<%= SC1->C1_ITEM %>'); return false;"><i class="icon-edit icon-large no-link"></i></a>
         </td>
@@ -192,5 +192,15 @@ function selecionarProduto(codigo, descricao){
   $modal2.modal('hide');
 }
 
+// Função para selecionar produto após escolher em popup modal f3
+function atualizarItem(){
+  
+  var item = $('#C1_ITEM').val();
+  var descricao_produto = $('#C1_PRODUTO_visual').val();
+  $('#itens_sc #' + item + ' .C1_PRODUTO_item').html(descricao_produto);
+
+  // fecha f3
+  $modal.modal('hide');
+}
 
 </script>
