@@ -1,0 +1,28 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  <h3>Produtos</h3>
+</div>
+<div class="modal-body">
+  <table class="table table-hover table-striped">
+    <tr>
+      <th>Código</th>
+      <th>Descrição</th>
+    </tr>
+    <%
+    SB1->(dbgotop())
+    while !SB1->(eof())   
+      %>
+      <tr>
+        <td><a href="#" onClick="selecionarProduto('<%= alltrim(SB1->B1_COD) %>', '<%= alltrim(SB1->B1_DESC) %>')"><%= SB1->B1_COD %></a></td>
+        <td><%= SB1->B1_DESC %></td>
+      </tr>
+      <%
+      SB1->(dbskip())
+    end
+    %>
+  </table>
+</div>
+<div class="modal-footer">
+  <button type="button" data-dismiss="modal" class="btn">Cancelar</button>
+</div>
+

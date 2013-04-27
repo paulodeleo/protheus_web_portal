@@ -48,6 +48,8 @@ user function index()
 	elseif HttpGet->modulo == 'f3'
 		if HttpGet->acao == 'compradores'
 	 		cHtml += u_portal9()
+		elseif HttpGet->acao == 'produtos'
+	 		cHtml += u_portal11() // F3Produto.apl
 	 	endif
 	else
 		cHtml += u_portal1()

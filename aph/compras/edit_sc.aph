@@ -117,6 +117,7 @@
 
 <!-- Div oculta para modais F3 -->
 <div id="ajax-modal" class="modal hide fade" tabindex="-1" style="display: none;" aria-hidden="true"></div>
+<div id="ajax-modal-2" class="modal hide fade" tabindex="-1" style="display: none;" aria-hidden="true"></div>
 
 <script>
 $(document).ready(function(){  
@@ -146,8 +147,8 @@ $(document).ready(function(){
 
 // Função para abrir popup modal f3 de compradores
 var $modal = $('#ajax-modal');
+var $modal2 = $('#ajax-modal-2');
 function abrirF3Compradores(){
-  // create the backdrop and wait for next modal to be triggered
   $('body').modalmanager('loading');
   var urlF3 = "/u_index.apw?modulo=f3&acao=compradores&naousarlayout=1";
   $modal.load(urlF3, '', function(){
@@ -155,6 +156,16 @@ function abrirF3Compradores(){
   });
 }
 
+// Função para abrir popup modal f3 de produtos
+function abrirF3Produtos(){
+  $('body').modalmanager('loading');
+  var urlF3 = "/u_index.apw?modulo=f3&acao=produtos&naousarlayout=1";
+  $modal2.load(urlF3, '', function(){
+    $modal2.modal({height: $(window).height() - 200 });
+  });
+}
+
+// Função para abrir popup modal f3 de edição de item
 function abrirPopupEdicaoItem(codigo, item){
   $('body').modalmanager('loading');
   var urlF3 = "/u_index.apw?modulo=compras&acao=edicao_item_sc&codigo=" + codigo + "&item=" + item + "&naousarlayout=1";
@@ -162,7 +173,6 @@ function abrirPopupEdicaoItem(codigo, item){
     $modal.modal({width: $(window).width() - 100 });
   });
 }
-
 
 // Função para selecionar comprador após escolher em popup modal f3
 function selecionarComprador(codigo, descricao){
@@ -172,5 +182,15 @@ function selecionarComprador(codigo, descricao){
   // fecha f3
   $modal.modal('hide');
 }
+
+// Função para selecionar produto após escolher em popup modal f3
+function selecionarProduto(codigo, descricao){
+  // atualiza valor no campo
+  $('#C1_PRODUTO').val(codigo);
+  $('#C1_PRODUTO_visual').val(codigo + " - " + descricao);
+  // fecha f3
+  $modal2.modal('hide');
+}
+
 
 </script>
