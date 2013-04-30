@@ -34,7 +34,24 @@ function SCCtrl($scope){
     if (confirm('Tem certeza que deseja remover este item da solicitação de compras?')){
       $scope.itens.splice(index, 1);
     }
-  }  
+  }
+
+  $scope.adicionar = function(index){
+    // Limpa o item que será editado
+    $scope.item = {};
+    // Calcula o número do próximo item que deve ser adicionado
+    var C1_ITEM = $scope.itens.length + 1;
+    // Adiciona zeros à esquerda (usando underscore.js) para ficar conforme o formato do Protheus
+    C1_ITEM = _.str.lpad(C1_ITEM, 4, '0');
+    // Atualiza o valor no item
+    $scope.item.C1_ITEM = C1_ITEM;
+
+    // Adiciona o item recém criado à lista de itens
+    $scope.itens.push($scope.item);
+
+    //Abre popup de edição do item recém criado, pois será necessário informar outros dados, como produto, qtd...
+    abrirPopupEdicaoItem();
+  }
 
   // Essa função deverá ser chamada apenas por código js/jquery normal
   $scope.atualizarProduto = function(codigo, descricao){
@@ -49,6 +66,7 @@ function SCCtrl($scope){
 
 <div ng-controller="SCCtrl">
 <form action="u_index.apw?modulo=compras&acao=atualizar_sc" method="post" id="form-sc" class="form-horizontal">
+  <% SC1->(dbgotop()) %>
   <input type="hidden" name="codigo" value="<%= SC1->C1_NUM %>">
   <fieldset>
     <legend>Edição de solicitação de compras</legend>
@@ -130,7 +148,9 @@ function SCCtrl($scope){
       <th>Necessidade</th>
       <th>Armazém</th>
       <th>Observações</th>
-      <th>Ações</th>
+      <th norwap>
+      Ações <a href="#" ng-click="adicionar()"><i class="icon-plus-sign icon-large no-link"></i></a>
+      </th>
     </tr>
 
     <tr ng-repeat="item in itens">
