@@ -14,7 +14,7 @@ user function portal10()
   _cQuery += "C1_PRODUTO = B1_COD "
   _cQuery += "left join " + RetSqlName("SY1") + " SY1 on "
   _cQuery += "C1_CODCOMP = Y1_COD "
-  _cQuery += "where SC1.D_E_L_E_T_ <> '*' AND SB1.D_E_L_E_T_ <> '*' AND SY1.D_E_L_E_T_ <> '*' "
+  _cQuery += "where SC1.D_E_L_E_T_ <> '*' AND SB1.D_E_L_E_T_ <> '*' "
   _cQuery += "AND C1_FILIAL = B1_FILIAL "
   _cQuery += "and SC1.C1_NUM ='" + HttpGet->codigo + "' "
   _cQuery += "and SC1.C1_ITEM ='" + HttpGet->item + "' "
