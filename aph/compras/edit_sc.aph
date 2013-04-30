@@ -1,4 +1,48 @@
-<form action="u_index.apw?modulo=compras&acao=atualizar_sc" method="post" class="form-horizontal">
+<script>
+// Função controller do angular.js para gerenciar a SC (apenas cabeçalho)
+function SCCtrl($scope){
+  $scope.itens = [
+    <%
+    SC1->(dbgotop())
+    while !SC1->(eof())   
+      %>
+        {
+          C1_NUM: '<%= SC1->C1_NUM %>',
+          C1_ITEM: '<%= SC1->C1_ITEM %>',
+          C1_PRODUTO: '<%= SC1->C1_PRODUTO %>',
+          C1_PRODUTO_VISUAL: '<%= SC1->C1_PRODUTO %> - <%= SC1->B1_DESC %>',
+          C1_UM: '<%= SC1->C1_UM %>',
+          C1_QUANT: '<%= SC1->C1_QUANT %>',
+          C1_SEGUM: '<%= SC1->C1_SEGUM %>',
+          C1_QTSEGUM: '<%= SC1->C1_QTSEGUM %>',
+          C1_DATPRF: '<%= stod(SC1->C1_DATPRF) %>',
+          C1_LOCAL: '<%= SC1->C1_LOCAL %>',
+          C1_OBS: '<%= SC1->C1_OBS %>'
+        },
+      <%
+      SC1->(dbskip())
+    end
+    %>
+  ];
+
+  $scope.editar = function(index){
+    $scope.item = $scope.itens[index];
+    abrirPopupEdicaoItem();
+  }
+
+  // Essa função deverá ser chamada apenas por código js/jquery normal
+  $scope.atualizarProduto = function(codigo, descricao){
+    $scope.$apply(function () {
+      $scope.item.C1_PRODUTO = codigo;
+      $scope.item.C1_PRODUTO_VISUAL = codigo + ' - ' + descricao;
+    });
+  }
+
+}
+</script>
+
+<div ng-controller="SCCtrl">
+<form action="u_index.apw?modulo=compras&acao=atualizar_sc" method="post" id="form-sc" class="form-horizontal">
   <input type="hidden" name="codigo" value="<%= SC1->C1_NUM %>">
   <fieldset>
     <legend>Edição de solicitação de compras</legend>
@@ -61,7 +105,7 @@
         <div class="control-group">
           <label class="control-label" for="C1_FILIAL">Filial de entrega:</label>
           <div class="controls">
-            <input type="text" name="C1_FILIAL" id="C1_FILIAL" value="<%= SC1->C1_FILIAL %> - <%= FWFilialName(HttpSession->empresa, SC1->C1_FILIAL, 1) %>" class="span8">
+            <input type="text" name="C1_FILIAL" id="C1_FILIAL" ng-model="SC1.C1_FILIAL" value="<%= SC1->C1_FILIAL %> - <%= FWFilialName(HttpSession->empresa, SC1->C1_FILIAL, 1) %>" class="span8">
           </div>
         </div>
       </div>
@@ -83,28 +127,23 @@
       <th>Ações</th>
     </tr>
 
-    <%
-    SC1->(dbgotop())
-    while !SC1->(eof())   
-      %>
-      <tr id="<%= SC1->C1_ITEM %>" class="item_sc">
-        <td class="C1_ITEM_item"><%= SC1->C1_ITEM %></td>
-        <td class="C1_PRODUTO_item"><%= SC1->C1_PRODUTO %> - <%= SC1->B1_DESC %></td>
-        <td class="C1_UM_item"><%= SC1->C1_UM %></td>
-        <td class="C1_QUANT_item"><%= SC1->C1_QUANT %></td>
-        <td class="C1_SEGUM_item"><%= SC1->C1_SEGUM %></td>
-        <td class="C1_QTSEGUM_item"><%= SC1->C1_QTSEGUM %></td>
-        <td class="C1_DATPRF_item"><%= stod(SC1->C1_DATPRF) %></td>
-        <td class="C1_LOCAL_item"><%= SC1->C1_LOCAL %></td>
-        <td class="C1_OBS_item"><%= SC1->C1_OBS %></td>
-        <td>
-          <a href="#" onClick="abrirPopupEdicaoItem('<%= SC1->C1_NUM %>', '<%= SC1->C1_ITEM %>'); return false;"><i class="icon-edit icon-large no-link"></i></a>
-        </td>
-      </tr>
-      <%
-      SC1->(dbskip())
-    end
-    %>
+    <tr ng-repeat="item in itens">
+      <input type="hidden" name="C1_ITEM" value="{{item.C1_ITEM}}">
+      <input type="hidden" name="C1_FILIAL" value="{{item.C1_FILIAL}}">
+      <input type="hidden" name="C1_PRODUTO" value="{{item.C1_PRODUTO}}">
+      <td>{{item.C1_ITEM}}</td>
+      <td>{{item.C1_PRODUTO_VISUAL}}</td>
+      <td>{{item.C1_UM}}</td>
+      <td>{{item.C1_QUANT}}</td>
+      <td>{{item.C1_SEGUM}}</td>
+      <td>{{item.C1_QTSEGUM}}</td>
+      <td>{{item.C1_DATPRF}}</td>
+      <td>{{item.C1_LOCAL}}</td>
+      <td>{{item.C1_OBS}}</td>
+      <td>
+        <a href="#" ng-click="editar($index)"><i class="icon-edit icon-large no-link"></i></a>
+      </td>
+    </tr>
 
   </table>
 
@@ -116,10 +155,15 @@
 </form>
 
 <!-- Div oculta para modais F3 -->
-<div id="ajax-modal" class="modal hide fade" tabindex="-1" style="display: none;" aria-hidden="true"></div>
-<div id="ajax-modal-2" class="modal hide fade" tabindex="-1" style="display: none;" aria-hidden="true"></div>
+<div id="ajax-modal-ajax" class="modal hide fade" tabindex="-1" style="display: none;" aria-hidden="true"></div>
+
+<!-- Div oculta para modais F3 -->
+<%= h_FrmItemSC() %>
+
+</div>
 
 <script>
+
 $(document).ready(function(){  
 
   // Adiciona datepicker aos campos marcados
@@ -146,8 +190,7 @@ $(document).ready(function(){
 });
 
 // Função para abrir popup modal f3 de compradores
-var $modal = $('#ajax-modal');
-var $modal2 = $('#ajax-modal-2');
+var $modal = $('#ajax-modal-ajax');
 function abrirF3Compradores(){
   $('body').modalmanager('loading');
   var urlF3 = "/u_index.apw?modulo=f3&acao=compradores&naousarlayout=1";
@@ -160,18 +203,20 @@ function abrirF3Compradores(){
 function abrirF3Produtos(){
   $('body').modalmanager('loading');
   var urlF3 = "/u_index.apw?modulo=f3&acao=produtos&naousarlayout=1";
-  $modal2.load(urlF3, '', function(){
-    $modal2.modal({height: $(window).height() - 200 });
+  $modal.load(urlF3, '', function(){
+    $modal.modal({height: $(window).height() - 200 });
   });
 }
 
 // Função para abrir popup modal f3 de edição de item
-function abrirPopupEdicaoItem(codigo, item){
+function abrirPopupEdicaoItem(){
   $('body').modalmanager('loading');
-  var urlF3 = "/u_index.apw?modulo=compras&acao=edicao_item_sc&codigo=" + codigo + "&item=" + item + "&naousarlayout=1";
-  $modal.load(urlF3, '', function(){
-    $modal.modal({width: $(window).width() - 100 });
-  });
+  //var urlF3 = "/u_index.apw?modulo=compras&acao=edicao_item_sc&codigo=" + codigo + "&item=" + item + "&naousarlayout=1";
+  //$modal.load(urlF3, '', function(){
+  //  $modal.modal({width: $(window).width() - 100 });
+  //});
+  
+  $('#modal-item-sc').modal({width: $(window).width() - 100 });
 }
 
 // Função para selecionar comprador após escolher em popup modal f3
@@ -186,21 +231,28 @@ function selecionarComprador(codigo, descricao){
 // Função para selecionar produto após escolher em popup modal f3
 function selecionarProduto(codigo, descricao){
   // atualiza valor no campo
-  $('#C1_PRODUTO').val(codigo);
-  $('#C1_PRODUTO_visual').val(codigo + " - " + descricao);
-  // fecha f3
-  $modal2.modal('hide');
-}
+  //$('#C1_PRODUTO').val(codigo);
+  //$('#C1_PRODUTO_visual').val(codigo + " - " + descricao);
 
-// Função para selecionar produto após escolher em popup modal f3
-function atualizarItem(){
-  
-  var item = $('#C1_ITEM').val();
-  var descricao_produto = $('#C1_PRODUTO_visual').val();
-  $('#itens_sc #' + item + ' .C1_PRODUTO_item').html(descricao_produto);
+  // Atualiza valor no vampo, usando função do angular criada somente para isso (não tem outro jeito simples)
+  var _scope = angular.element($('#form-sc')).scope();
+  _scope.atualizarProduto(codigo, descricao);
 
   // fecha f3
   $modal.modal('hide');
 }
+
+// Função para selecionar produto após escolher em popup modal f3
+function atualizarItem(){
+
+  //var item = $('#C1_ITEM').val();
+  //var descricao_produto = $('#C1_PRODUTO_visual').val();
+  //$('#itens_sc #' + item + ' .C1_PRODUTO_item').html(descricao_produto);
+
+  // fecha f3
+  $('#modal-item-sc').modal('hide');
+
+}
+
 
 </script>
