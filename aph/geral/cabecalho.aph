@@ -12,6 +12,7 @@
 <link href="/css/portal.css" rel="stylesheet">
 <link href='/css/table-fixed-header.css' rel='stylesheet' />
 <script src="/js/jquery-1.8.3.min.js"></script>
+<script src="/js/underscore.string.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src='/js/angular.min.js'></script>
 <script src="/js/chosen.jquery.min.js"></script>
