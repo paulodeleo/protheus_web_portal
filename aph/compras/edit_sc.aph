@@ -30,6 +30,12 @@ function SCCtrl($scope){
     abrirPopupEdicaoItem();
   }
 
+  $scope.excluir = function(index){
+    if (confirm('Tem certeza que deseja remover este item da solicitação de compras?')){
+      $scope.itens.splice(index, 1);
+    }
+  }  
+
   // Essa função deverá ser chamada apenas por código js/jquery normal
   $scope.atualizarProduto = function(codigo, descricao){
     $scope.$apply(function () {
@@ -142,6 +148,7 @@ function SCCtrl($scope){
       <td>{{item.C1_OBS}}</td>
       <td>
         <a href="#" ng-click="editar($index)"><i class="icon-edit icon-large no-link"></i></a>
+        <a href="#" ng-click="excluir($index)"><i class="icon-remove icon-large no-link"></i></a>        
       </td>
     </tr>
 
