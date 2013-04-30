@@ -13,7 +13,7 @@
     while !SB1->(eof())   
       %>
       <tr>
-        <td><a href="#" onClick="selecionarProduto('<%= alltrim(SB1->B1_COD) %>', '<%= alltrim(SB1->B1_DESC) %>', '<%= alltrim(SB1->B1_UM) %>')"><%= SB1->B1_COD %></a></td>
+        <td><a href="#" onClick="selecionarProduto('<%= alltrim(SB1->B1_COD) %>', '<%= alltrim(SB1->B1_DESC) %>', '<%= alltrim(SB1->B1_UM) %>', '<%= alltrim(SB1->B1_SEGUM) %>')"><%= SB1->B1_COD %></a></td>
         <td><%= SB1->B1_DESC %></td>
       </tr>
       <%
