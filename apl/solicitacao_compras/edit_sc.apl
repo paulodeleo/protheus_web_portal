@@ -18,8 +18,6 @@ user function portal7()
   _cQuery += "AND C1_FILIAL = B1_FILIAL "
   _cQuery += "and SC1.C1_NUM ='" + HttpGet->codigo + "' "
 
-  conout(_cQuery)
-
   If Select('SC1') <> 0
     SC1->(DbCloseArea())
   Endif
