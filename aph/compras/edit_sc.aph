@@ -54,10 +54,11 @@ function SCCtrl($scope){
   }
 
   // Essa função deverá ser chamada apenas por código js/jquery normal
-  $scope.atualizarProduto = function(codigo, descricao){
+  $scope.atualizarProduto = function(codigo, descricao, um){
     $scope.$apply(function () {
       $scope.item.C1_PRODUTO = codigo;
       $scope.item.C1_PRODUTO_VISUAL = codigo + ' - ' + descricao;
+      $scope.item.C1_UM = um;
     });
   }
 
@@ -256,14 +257,14 @@ function selecionarComprador(codigo, descricao){
 }
 
 // Função para selecionar produto após escolher em popup modal f3
-function selecionarProduto(codigo, descricao){
+function selecionarProduto(codigo, descricao, um){
   // atualiza valor no campo
   //$('#C1_PRODUTO').val(codigo);
   //$('#C1_PRODUTO_visual').val(codigo + " - " + descricao);
 
   // Atualiza valor no vampo, usando função do angular criada somente para isso (não tem outro jeito simples)
   var _scope = angular.element($('#form-sc')).scope();
-  _scope.atualizarProduto(codigo, descricao);
+  _scope.atualizarProduto(codigo, descricao, um);
 
   // fecha f3
   $modal.modal('hide');
