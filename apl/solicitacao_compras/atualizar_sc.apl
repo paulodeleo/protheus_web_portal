@@ -22,26 +22,29 @@ user function portal8()
   aadd(aCabec,{"C1_CODCOMP", HttpPost->C1_CODCOMP})
 
   // Extrai itens enviados via http para array de itens
-  separador = ', '
-  aC1_ITEM := StrTokArr(HttpPost->C1_ITEM, separador)
-  aC1_PRODUTO := StrTokArr(HttpPost->C1_PRODUTO, separador)
-  aC1_QUANT := StrTokArr(HttpPost->C1_QUANT, separador)
-
-  // Adiciona itens
-  for i := 1 to len(aC1_ITEM) // pegando por aC1_ITEM mas todos os outros campos recebidos devem ter o mesmo tamnho
+  aCamposItem := {'C1_ITEM', 'C1_PRODUTO', 'C1_QUANT', 'C1_D_E_L_E_T_'} // lista de campos de itens que serão recebidos com final "_x" sendo x a numeração
+  For i := 1 to val(HttpPost->total_itens) // campo de controle de qtd de itens recebidos
     aLinha := {}
-    aadd(aLinha,{"C1_ITEM"   , aC1_ITEM[i], Nil})
-    aadd(aLinha,{"C1_PRODUTO", aC1_PRODUTO[i], Nil})
-    aadd(aLinha,{"C1_QUANT"  , val(aC1_QUANT[i]), Nil})
+    For j := 1 to len(aCamposItem)
+      cCampo := aCamposItem[j]
+      cValor := ''
+      // Atribui o valor do campo via macro substituição. O código executado será algo como: 
+      // cValor := HttpPost->C1_ITEM_1
+      cMacroSub := 'cValor := HttpPost->' + cCampo + '_' + cvaltochar(i)
+      &(cMacroSub)
+      // Trata exceções, como campos numéricos
+      if cCampo == "C1_QUANT"
+        cValor := val(alltrim(cValor))
+      else
+        cValor := alltrim(cValor)
+      endif
+      // Adiciona campo ao item a ser atualizado
+      aadd(aLinha,{cCampo, cValor,  Nil})
+    Next j
+    // Adiciona linha de item a ser atualizado
     aadd(aItens,aLinha) 
-  next i
+  Next i
 
-  //aadd(aLinha,{"C1_ITEM"   , '0001', Nil})     
-  //aadd(aLinha,{"C1_PRODUTO", "0201.0090", Nil})      
-  //aadd(aLinha,{"C1_QUANT"  , 10, Nil})      
-  //aadd(aItens,aLinha)   
-
-  //aItens := nil // por enquanto, por não ter nenhum item para atualizar ainda
   MSExecAuto({|x,y| mata110(x, y, 4)}, aCabec, aItens) // 4 para alteração
   If !lMsErroAuto
     HttpSession->alert := 'success'
