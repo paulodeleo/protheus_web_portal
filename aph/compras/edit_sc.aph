@@ -32,11 +32,12 @@ function SCCtrl($scope){
 
   $scope.excluir = function(index){
     if (confirm('Tem certeza que deseja remover este item da solicitação de compras?')){
-      $scope.itens.splice(index, 1);
+      //$scope.itens.splice(index, 1); //remove item do array
+      $scope.itens[index].C1_D_E_L_E_T_ = '*';
     }
   }
 
-  $scope.adicionar = function(index){
+  $scope.adicionar = function(){
     // Limpa o item que será editado
     $scope.item = {};
     // Calcula o número do próximo item que deve ser adicionado
@@ -70,6 +71,7 @@ function SCCtrl($scope){
 <form action="u_index.apw?modulo=compras&acao=atualizar_sc" method="post" id="form-sc" class="form-horizontal">
   <% SC1->(dbgotop()) %>
   <input type="hidden" name="codigo" value="<%= SC1->C1_NUM %>">
+  <input type="hidden" name="total_itens" value="{{itens.length}}">
   <fieldset>
     <legend>Edição de solicitação de compras</legend>
     
@@ -153,25 +155,26 @@ function SCCtrl($scope){
       <th>Ações</th>
     </tr>
 
-    <tr ng-repeat="item in itens">
-      <input type="hidden" name="C1_ITEM" value="{{item.C1_ITEM}}">
-      <input type="hidden" name="C1_FILIAL" value="{{item.C1_FILIAL}}">
-      <input type="hidden" name="C1_PRODUTO" value="{{item.C1_PRODUTO}}">
-      <input type="hidden" name="C1_UM" value="{{item.C1_UM}}">
-      <input type="hidden" name="C1_QUANT" value="{{item.C1_QUANT}}">
-      <input type="hidden" name="C1_SEGUM" value="{{item.C1_SEGUM}}">
-      <input type="hidden" name="C1_QTSEGUM" value="{{item.C1_QTSEGUM}}">
+    <tr ng-repeat="item in itens" class="item-sc{{item.C1_D_E_L_E_T_ == '*' && '-delete' || ''}}">
+      <input type="hidden" name="C1_ITEM_{{$index+1}}" value="{{item.C1_ITEM}}">
+      <input type="hidden" name="C1_FILIAL_{{$index+1}}" value="{{item.C1_FILIAL}}">
+      <input type="hidden" name="C1_PRODUTO_{{$index+1}}" value="{{item.C1_PRODUTO}}">
+      <input type="hidden" name="C1_UM_{{$index+1}}" value="{{item.C1_UM}}">
+      <input type="hidden" name="C1_QUANT_{{$index+1}}" value="{{item.C1_QUANT}}">
+      <input type="hidden" name="C1_SEGUM_{{$index+1}}" value="{{item.C1_SEGUM}}">
+      <input type="hidden" name="C1_QTSEGUM_{{$index+1}}" value="{{item.C1_QTSEGUM}}">
       <input type="hidden" name="C1_DATPRF" value="{{item.C1_DATPRF}}">
-      <input type="hidden" name="C1_LOCAL" value="{{item.C1_LOCAL}}">
-      <input type="hidden" name="C1_OBS" value="{{item.C1_OBS}}">
-      <input type="hidden" name="C1_CC" value="{{item.C1_CC}}">
-      <input type="hidden" name="C1_CONTA" value="{{item.C1_CONTA}}">
-      <input type="hidden" name="C1_DATA" value="{{item.C1_DATA}}">
-      <input type="hidden" name="C1_FORNECE" value="{{item.C1_FORNECE}}">
-      <input type="hidden" name="C1_LOJA" value="{{item.C1_LOJA}}">
-      <input type="hidden" name="C1_ITEMCTA" value="{{item.C1_ITEMCTA}}">
-      <input type="hidden" name="C1_OP" value="{{item.C1_OP}}">
-      <input type="hidden" name="C1_QTDORIG" value="{{item.C1_QTDORIG}}">
+      <input type="hidden" name="C1_LOCAL_{{$index+1}}" value="{{item.C1_LOCAL}}">
+      <input type="hidden" name="C1_OBS_{{$index+1}}" value="{{item.C1_OBS}}">
+      <input type="hidden" name="C1_CC_{{$index+1}}" value="{{item.C1_CC}}">
+      <input type="hidden" name="C1_CONTA_{{$index+1}}" value="{{item.C1_CONTA}}">
+      <input type="hidden" name="C1_DATA_{{$index+1}}" value="{{item.C1_DATA}}">
+      <input type="hidden" name="C1_FORNECE_{{$index+1}}" value="{{item.C1_FORNECE}}">
+      <input type="hidden" name="C1_LOJA_{{$index+1}}" value="{{item.C1_LOJA}}">
+      <input type="hidden" name="C1_ITEMCTA_{{$index+1}}" value="{{item.C1_ITEMCTA}}">
+      <input type="hidden" name="C1_OP_{{$index+1}}" value="{{item.C1_OP}}">
+      <input type="hidden" name="C1_QTDORIG_{{$index+1}}" value="{{item.C1_QTDORIG}}">
+      <input type="hidden" name="C1_D_E_L_E_T__{{$index+1}}" value="{{item.C1_D_E_L_E_T_}}">
       <td>{{item.C1_ITEM}}</td>
       <td>{{item.C1_PRODUTO_VISUAL}}</td>
       <td>{{item.C1_UM}}</td>
