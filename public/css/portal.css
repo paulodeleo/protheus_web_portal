@@ -43,6 +43,11 @@ i.sc-status-8 {color: yellow;}/*Pedido Colocado Parcial*/
 i.sc-status-9 {color: blue;}/*Processo de Cotacao*/
 i.sc-status-10 {color: #FF00FF;}/*Produto Importado*/
 
+tr.item-sc-delete {
+  text-decoration: line-through;
+  color: grey;
+}
+
 form#form-empresa-filial {
   margin-bottom: 0;
 }
