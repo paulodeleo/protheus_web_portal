@@ -36,6 +36,8 @@ user function index()
 	 		cHtml += u_portal8()
 	 	elseif HttpGet->acao == 'edicao_item_sc'
 	 		cHtml += u_portal10()
+	 	elseif HttpGet->acao == 'nova_sc'
+	 		cHtml += u_portal12() // apl/solicitacao/compras/nova_sc.apl
 	 	elseif HttpGet->acao == 'cotacoes'
 	 		cHtml += 'Tela de tesde de compras - cotacoes'
 	 	elseif HttpGet->acao == 'pedidos'

@@ -1,29 +1,7 @@
 <script>
 // Função controller do angular.js para gerenciar a SC (apenas cabeçalho)
 function SCCtrl($scope){
-  $scope.itens = [
-    <%
-    SC1->(dbgotop())
-    while !SC1->(eof())   
-      %>
-        {
-          C1_NUM: '<%= SC1->C1_NUM %>',
-          C1_ITEM: '<%= SC1->C1_ITEM %>',
-          C1_PRODUTO: '<%= SC1->C1_PRODUTO %>',
-          C1_PRODUTO_VISUAL: '<%= SC1->C1_PRODUTO %> - <%= SC1->B1_DESC %>',
-          C1_UM: '<%= SC1->C1_UM %>',
-          C1_QUANT: '<%= SC1->C1_QUANT %>',
-          C1_SEGUM: '<%= SC1->C1_SEGUM %>',
-          C1_QTSEGUM: '<%= SC1->C1_QTSEGUM %>',
-          C1_DATPRF: '<%= stod(SC1->C1_DATPRF) %>',
-          C1_LOCAL: '<%= SC1->C1_LOCAL %>',
-          C1_OBS: '<%= SC1->C1_OBS %>'
-        },
-      <%
-      SC1->(dbskip())
-    end
-    %>
-  ];
+  $scope.itens = [];
 
   $scope.editar = function(index){
     $scope.item = $scope.itens[index];
@@ -32,8 +10,8 @@ function SCCtrl($scope){
 
   $scope.excluir = function(index){
     if (confirm('Tem certeza que deseja remover este item da solicitação de compras?')){
-      //$scope.itens.splice(index, 1); //remove item do array
-      $scope.itens[index].C1_D_E_L_E_T_ = '*';
+      $scope.itens.splice(index, 1); //remove item do array
+      //$scope.itens[index].C1_D_E_L_E_T_ = '*';
     }
   }
 
@@ -64,14 +42,22 @@ function SCCtrl($scope){
     });
   }
 
+  // Função para validar envio da SC
+  $scope.validar = function(){
+    if ($scope.itens.length == 0) {
+      alert('Inclua pelo menos um item na solicitação de compras');
+    } else {
+      $('#form-sc').submit();
+    }
+  }
+
 }
 </script>
 
 <div ng-controller="SCCtrl">
 <form action="u_index.apw?modulo=compras&acao=atualizar_sc" method="post" id="form-sc" class="form-horizontal">
-  <% SC1->(dbgotop()) %>
-  <input type="hidden" name="codigo" value="<%= SC1->C1_NUM %>">
   <input type="hidden" name="total_itens" value="{{itens.length}}">
+  <input type="hidden" name="operacao" value="inclusao">
   <fieldset>
     <legend>Solicitação de compras</legend>
     
@@ -82,8 +68,6 @@ function SCCtrl($scope){
     <div class="alert alert-<%= cClasseAlerta %> <%= cClasseVisivel %>">
     <% if cClasseAlerta == 'success' %>
         <b>Solicitação de compras alterada com sucesso!</b>
-    <% elseif cClasseAlerta == 'inclusao' %>
-        <b>Solicitação de compras Nº <b><%= SC1->C1_NUM %></b> criada com sucesso!</b>
     <% elseif cClasseAlerta == 'error' %>
         <b>Ocorreram erros que impediram a atualização da solicitação de compras:</b>
         <ul>
@@ -99,19 +83,19 @@ function SCCtrl($scope){
         <div class="control-group">
           <label class="control-label" for="C1_NUM">Nº da SC:</label>
           <div class="controls">
-            <input type="text" name="C1_NUM" id="C1_NUM" value="<%= SC1->C1_NUM %>" class="span3" readonly>
+            <input type="text" name="C1_NUM" id="C1_NUM" value="" class="span3" readonly>
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="C1_SOLICIT">Solicitante:</label>
           <div class="controls">
-            <input type="text" name="C1_SOLICIT" id="C1_SOLICIT" value="<%= SC1->C1_SOLICIT %>" class="span5" readonly>
+            <input type="text" name="C1_SOLICIT" id="C1_SOLICIT" value="<%= C1_SOLICIT %>" class="span5" readonly>
           </div>
         </div>
         <div class="control-group input-append" style="display: block">
           <label class="control-label" for="C1_EMISSAO">Dt. Emissão:</label>
           <div class="controls date">
-            <input type="text" name="C1_EMISSAO" id="C1_EMISSAO" value="<%= stod(SC1->C1_EMISSAO) %>" class="span4 datepicker">
+            <input type="text" name="C1_EMISSAO" id="C1_EMISSAO" value="<%= C1_EMISSAO %>" class="span4 datepicker">
             <span class="add-on"><i class="icon-calendar"></i></span>
           </div>
         </div>
@@ -121,21 +105,21 @@ function SCCtrl($scope){
         <div class="control-group">
           <label class="control-label" for="C1_UNIDREQ">Un. Req.:</label>
           <div class="controls">
-            <input type="text" name="C1_UNIDREQ" id="C1_UNIDREQ" value="<%= SC1->C1_UNIDREQ %>" class="span3">
+            <input type="text" name="C1_UNIDREQ" id="C1_UNIDREQ" value="" class="span3">
           </div>
         </div>
         <div class="control-group input-append" style="display: block">
           <label class="control-label" for="C1_CODCOMP_visual">Cod. Comprador:</label>
           <div class="controls ">
-            <input type="hidden" name="C1_CODCOMP" id="C1_CODCOMP" value="<%= alltrim(SC1->C1_CODCOMP) %>">
-            <input type="text" name="C1_CODCOMP_visual" id="C1_CODCOMP_visual" value="<%= alltrim(SC1->C1_CODCOMP + ' - ' + SY1->Y1_NOME) %>" class="span7" readonly>
+            <input type="hidden" name="C1_CODCOMP" id="C1_CODCOMP" value="">
+            <input type="text" name="C1_CODCOMP_visual" id="C1_CODCOMP_visual" value="" class="span7" readonly>
             <a href="#" onClick="abrirF3Compradores();"><i class="icon-search icon-large no-link add-on"></i></a>
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="C1_FILIAL">Filial de entrega:</label>
           <div class="controls">
-            <input type="text" name="C1_FILIAL" id="C1_FILIAL" ng-model="SC1.C1_FILIAL" value="<%= SC1->C1_FILIAL %> - <%= FWFilialName(HttpSession->empresa, SC1->C1_FILIAL, 1) %>" class="span8">
+            <input type="text" name="C1_FILIAL" id="C1_FILIAL" ng-model="SC1.C1_FILIAL" value="" class="span8">
           </div>
         </div>
       </div>
@@ -195,7 +179,7 @@ function SCCtrl($scope){
   </table>
 
   <div>
-    <input type="submit" class="btn btn-primary" value="Gravar Solicitação">
+    <button type="button" ng-click="validar();" class="btn btn-primary">Gravar Solicitação</button>
     <button type="button" ng-click="adicionar()" class="btn btn-info">Adicionar Item</button>
     <a href="u_index.apw?modulo=compras&acao=listagem_sc" class="btn">Voltar para listagem de SC</a>
   </div>

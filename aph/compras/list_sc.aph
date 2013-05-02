@@ -3,7 +3,7 @@
     <h3>Listagem de Solicitações de Compras</h3>
   </div>
   <div class="span2">
-    <a href="u_index.apw?modulo=compras&acao=form_incluir" class="btn btn-primary" onClick="javascript:alert('ainda não implementado'); return false;">Incluir SC</a>
+    <a href="u_index.apw?modulo=compras&acao=nova_sc" class="btn btn-primary">Incluir SC</a>
   </div>
 </div>
 <div class="row">
