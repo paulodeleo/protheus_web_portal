@@ -2,10 +2,10 @@ Esse repositório é um backup dos experimentos que fiz com ADVPL web para Proth
 
 Screenshots:
 
-![login](/public/screenshots/portal-login.jpg)
+![login](https://github.com/paulodeleo/protheus_web_portal/blob/master/public/screeshots/portal-login.jpg?raw=true)
 
-![listagem](/public/screenshots/portal-listagem.jpg)
+![listagem](https://github.com/paulodeleo/protheus_web_portal/blob/master/public/screeshots/portal-listagem.jpg?raw=true)
 
-![edição](/public/screenshots/portal-edicao-sc.jpg)
+![edição](https://github.com/paulodeleo/protheus_web_portal/blob/master/public/screeshots/portal-edicao-sc.jpg?raw=true)
 
-![edição item](/public/screenshots/portal-edicao-ITEM-sc.jpg)
+![edição item](https://github.com/paulodeleo/protheus_web_portal/blob/master/public/screeshots/portal-edicao-ITEM-sc.jpg?raw=true)
